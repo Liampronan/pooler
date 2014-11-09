@@ -6,7 +6,7 @@
 var mongoose = require('mongoose');
 var GithubStrategy = require('passport-github').Strategy;
 var config = require('config');
-var User = mongoose.model('User');
+var User = mongoose.model('Puser');
 
 /**
  * Expose

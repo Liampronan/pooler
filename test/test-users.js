@@ -8,7 +8,7 @@ var mongoose = require('mongoose')
   , request = require('supertest')
   , app = require('../server')
   , context = describe
-  , User = mongoose.model('User')
+  , User = mongoose.model('Puser')
 
 var cookies, count
 

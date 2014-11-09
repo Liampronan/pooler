@@ -4,7 +4,7 @@
  */
 
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
+var User = mongoose.model('Puser');
 var utils = require('../../lib/utils');
 
 /**

@@ -6,7 +6,7 @@
 var mongoose = require('mongoose');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var config = require('config');
-var User = mongoose.model('User');
+var User = mongoose.model('Puser');
 
 /**
  * Expose

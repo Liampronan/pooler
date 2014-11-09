@@ -19,7 +19,7 @@ var oAuthTypes = [
  * User Schema
  */
 
-var UserSchema = new Schema({
+var PuserSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
   username: { type: String, default: '' },
@@ -38,7 +38,7 @@ var UserSchema = new Schema({
  * Virtuals
  */
 
-UserSchema
+PuserSchema
   .virtual('password')
   .set(function(password) {
     this._password = password;
@@ -57,18 +57,18 @@ var validatePresenceOf = function (value) {
 
 // the below 5 validations only apply if you are signing up traditionally
 
-UserSchema.path('name').validate(function (name) {
+PuserSchema.path('name').validate(function (name) {
   if (this.skipValidation()) return true;
   return name.length;
 }, 'Name cannot be blank');
 
-UserSchema.path('email').validate(function (email) {
+PuserSchema.path('email').validate(function (email) {
   if (this.skipValidation()) return true;
   return email.length;
 }, 'Email cannot be blank');
 
-UserSchema.path('email').validate(function (email, fn) {
-  var User = mongoose.model('User');
+PuserSchema.path('email').validate(function (email, fn) {
+  var User = mongoose.model('Puser');
   if (this.skipValidation()) fn(true);
 
   // Check only when it is a new user or when email field is modified
@@ -79,12 +79,12 @@ UserSchema.path('email').validate(function (email, fn) {
   } else fn(true);
 }, 'Email already exists');
 
-UserSchema.path('username').validate(function (username) {
+PuserSchema.path('username').validate(function (username) {
   if (this.skipValidation()) return true;
   return username.length;
 }, 'Username cannot be blank');
 
-UserSchema.path('hashed_password').validate(function (hashed_password) {
+PuserSchema.path('hashed_password').validate(function (hashed_password) {
   if (this.skipValidation()) return true;
   return hashed_password.length;
 }, 'Password cannot be blank');
@@ -94,7 +94,7 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
  * Pre-save hook
  */
 
-UserSchema.pre('save', function(next) {
+PuserSchema.pre('save', function(next) {
   if (!this.isNew) return next();
 
   if (!validatePresenceOf(this.password) && !this.skipValidation()) {
@@ -108,7 +108,7 @@ UserSchema.pre('save', function(next) {
  * Methods
  */
 
-UserSchema.methods = {
+PuserSchema.methods = {
 
   /**
    * Authenticate - check if the passwords are the same
@@ -166,7 +166,7 @@ UserSchema.methods = {
  * Statics
  */
 
-UserSchema.statics = {
+PuserSchema.statics = {
 
   /**
    * Load
@@ -183,5 +183,5 @@ UserSchema.statics = {
       .exec(cb);
   }
 }
-
-mongoose.model('User', UserSchema);
+//this is really terrible, but since I'm limited to one OR DB, it's a necessary hack
+mongoose.model('Puser', PuserSchema );

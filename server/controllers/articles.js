@@ -13,7 +13,7 @@ var extend = require('util')._extend
  */
 
 exports.load = function (req, res, next, id){
-  var User = mongoose.model('User');
+  var User = mongoose.model('Puser');
 
   Article.load(id, function (err, article) {
     if (err) return next(err);
