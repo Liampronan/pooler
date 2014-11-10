@@ -1,0 +1,14 @@
+// Colors
+// -------------------------------
+
+$light:                 #fff !default;
+$stable:                #f8f8f8 !default;
+$positive:              #4ea4be !default; //#4a87ee;
+$calm:                  #40A7CF !default; //#43cee6;
+$balanced:              #a2c57a !default; //#66cc33
+$energized:             #f0b840 !default;
+$assertive:             #ef4e3a !default;
+$royal:                 #203245 !default;
+$dark:                  #444 !default;
+
+@import "../lib/ionic/scss/ionic.scss";

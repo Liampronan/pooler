@@ -1,0 +1,47 @@
+<ion-view title="Pooler">
+  <ion-content >
+    <div id="map_canvas">
+      <ui-gmap-google-map center='map.center' zoom='map.zoom' data-tap-disabled="true">
+        <ui-gmap-marker ng-repeat="marker in markers"
+          click="showWindow(marker.idKey)"
+          idKey="marker.idKey"
+          coords="marker.coords"
+          options="marker.options" >
+            <ui-gmap-window
+              show="marker.windowOpts.visible"
+              closeClick="closeWindow(marker.idKey)" data-tap-disabled="true">
+              <div class="trip-modal">
+                <div class="row">
+                  <div class="small-margin-top">
+                    <div class="round">
+                      <img src="img/liam.jpeg" alt=""/>
+                    </div>
+                    <h5 class="text-center small-margin-top"><b>Liam</b></h5>
+                  </div>
+                  <div class="col trip-info">
+                    <b>Days:</b> M, T, W, Th
+                    <br/>
+                    <b>Depart:</b> 7:15 am
+                    <br/>
+                    <b>Buffer:</b> +/- 15 min
+                    <br/>
+                    <div class="destination-info"><b>Destination:</b> 4th and King, 94103</div>
+                  </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col col-offset-20">
+                    <button class="button button-small button-calm icon-left ion-plus-round join-ride">
+                      Join Ride
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ui-gmap-window>
+
+        </ui-gmap-marker>
+
+
+      </ui-gmap-google-map>
+    </div>
+  </ion-content>
+</ion-view>

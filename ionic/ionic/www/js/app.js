@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns()])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -21,14 +21,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', 'GoogleMapApiProvider'.ns(), '$ionicTabsConfig',
+  function($stateProvider, $urlRouterProvider, GoogleMapApi, $ionicTabsConfig) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   $stateProvider
-
     // setup an abstract state for the tabs directive
     .state('tab', {
       url: "/tab",
@@ -42,37 +38,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/dash',
       views: {
         'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
+          templateUrl: 'dash/templates/tab-dash.html',
           controller: 'DashCtrl'
         }
       }
     })
 
-    .state('tab.friends', {
-      url: '/friends',
+    .state('tab.nearby', {
+      url: '/nearby',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
+        'tab-nearby': {
+          templateUrl: 'nearby/templates/tab-nearby.html',
+          controller: 'NearbyCtrl'
         }
       }
     })
 
-    .state('tab.account', {
-      url: '/account',
+    .state('tab.matches', {
+      url: '/matches',
       views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
+        'tab-matches': {
+          templateUrl: 'matches/templates/tab-matches.html',
+          controller: 'MatchesCtrl'
         }
       }
     });
@@ -80,5 +67,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
-});
+  GoogleMapApi.configure({
+    //    key: 'your api key',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization'
+  });
+  // Override the Android platform default to add "tabs-striped" class to "ion-tabs" elements.
+  $ionicTabsConfig.type = '';
+
+
+  }]);
 
