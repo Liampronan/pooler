@@ -7,6 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns()])
 
+.constant('API_HOST', 'http://localhost:9000')
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -74,6 +76,8 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
   });
   // Override the Android platform default to add "tabs-striped" class to "ion-tabs" elements.
   $ionicTabsConfig.type = '';
+
+
 
 
   }]);

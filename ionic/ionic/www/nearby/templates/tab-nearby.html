@@ -5,7 +5,7 @@
         <ui-gmap-marker ng-repeat="marker in markers"
           click="showWindow(marker.idKey)"
           idKey="marker.idKey"
-          coords="marker.coords"
+          coords="marker.departCoords"
           options="marker.options" >
             <ui-gmap-window
               show="marker.windowOpts.visible"
@@ -30,7 +30,7 @@
                 </div>
                 <div class="row text-center">
                   <div class="col col-offset-20">
-                    <button class="button button-small button-calm icon-left ion-plus-round join-ride">
+                    <button class="button button-small button-energized icon-left ion-plus-round join-ride">
                       Join Ride
                     </button>
                   </div>
@@ -39,6 +39,23 @@
             </ui-gmap-window>
 
         </ui-gmap-marker>
+
+        <ui-gmap-polyline path='polyline.path'
+                          fit="false"
+                          visible='true'
+                          icons="[{icon: {path: img/uber.png},
+                                  offset: '25px',
+                                  repeat: '50px'}]"
+                          stroke="{color: '#203245',weight: 2, opacity: .85}" ng-if="showPolyline">
+        </ui-gmap-polyline>
+        <!--radius temp set to half mile (804.672 meters)-->
+        <ui-gmap-circle ng-if="showPolyline"
+                center="polyline.path[1]"
+                radius="804.672"
+                stroke="{color: '#74899F',weight: 2, opacity: 1}"
+                fill="{color: '#B6C9DB',weight: 2, opacity: .45}">
+
+        </ui-gmap-circle>
 
 
       </ui-gmap-google-map>
