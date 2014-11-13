@@ -4,11 +4,9 @@ angular.module('pooler')
   .service('uberAuthService', ['$http', '$stateParams', '$q', '$location', 'API_HOST', '$window',
     function ($http, $stateParams, $q, $location, API_HOST, $window) {
       var clientId = "v8eZpgMwr5r8Hvw2FUub8oRESYrbNICH",
-          authCode = null,
           _this = this,
-          authUrl = 'https://login.uber.com/oauth/authorize?' +
-                     'response_type=code' +
-                     '&client_id=' + clientId;
+        authUrl = API_HOST + '/auth/uber/',
+        userProfile;
 
 
       this.login = function () {
@@ -46,13 +44,24 @@ angular.module('pooler')
 
       // function called when the browser is closed
       function browserOnClose(output) {
+        console.log('inonclose');
 //      get code from response url
 //        var code = output.url.toString(), //non-google hack
+        console.log('urlIn', output.url);
         var code = output.url[0].toString(),
-          codeRegex = /\?code=(.*)/;
-        authCode = code.match(codeRegex)[1];
-        console.log('codeeee', authCode);
+          firstNameRegex = /\?firstName=(.*)/,
+          uberIdRegex = /&uberid=(.*)/,
+          profilePictureRegex = /&profilePicture=(.*)/,
+          firstName = code.match(firstNameRegex)[1],
+          uberId = code.match(uberIdRegex)[1],
+          profilePicture = code.match(profilePictureRegex)[1],
+          user = { firstName: firstName, uberId: uberId, profilePicture: profilePicture };
 
+        console.log('user', user);
+        console.log('user', user.firstName);
+        console.log('user', user.uberId);
+        console.log('user', user.profilePicture);
+        userProfile = user;
       }
 
       function getAuthCodeFromResponse(browserWindow) {
@@ -65,7 +74,8 @@ angular.module('pooler')
             var _url = url.toString();
 
             // we check if the callback page was reached
-            if (_url.indexOf("code") > -1 && _url.indexOf('google') > -1 && _url.indexOf('uber') === -1) {
+            if (_url.indexOf("localhost") > -1 && _url.indexOf('.uber.com') === -1) {
+              console.log('URLL', _url);
               // the callback page was reached therefore it contains the json output returned from the server
               // we parse the html page to strip out the html tags and keep the json string
               browserWindow.executeScript({code: "document.body.innerHTML" }, function (response) {

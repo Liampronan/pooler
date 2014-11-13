@@ -38,8 +38,36 @@ module.exports = function (app, passport) {
   app.get('/users/:userId', users.show);
   app.get('/auth/uber',
     passport.authenticate('uber'));
+  app.get('/auth/uber/callback',
+    passport.authenticate('uber', {
+      failureRedirect: '/login'
+    }), users.authCallback);
 
-
+  app.get('/auth/facebook',
+    passport.authenticate('facebook', {
+      scope: [ 'email', 'user_about_me'],
+      failureRedirect: '/login'
+    }), users.signin);
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      failureRedirect: '/login'
+    }), users.authCallback);
+  app.get('/auth/github',
+    passport.authenticate('github', {
+      failureRedirect: '/login'
+    }), users.signin);
+  app.get('/auth/github/callback',
+    passport.authenticate('github', {
+      failureRedirect: '/login'
+    }), users.authCallback);
+  app.get('/auth/twitter',
+    passport.authenticate('twitter', {
+      failureRedirect: '/login'
+    }), users.signin);
+  app.get('/auth/twitter/callback',
+    passport.authenticate('twitter', {
+      failureRedirect: '/login'
+    }), users.authCallback);
   app.get('/auth/google',
     passport.authenticate('google', {
       failureRedirect: '/login',

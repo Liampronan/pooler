@@ -12,7 +12,8 @@ var oAuthTypes = [
   'twitter',
   'facebook',
   'google',
-  'linkedin'
+  'linkedin',
+  'uber'
 ];
 
 /**
@@ -21,17 +22,22 @@ var oAuthTypes = [
 
 var PuserSchema = new Schema({
   name: { type: String, default: '' },
+  firstName: {type: String, default: ''},
+  lastName: {type: String, defaults: ''},
   email: { type: String, default: '' },
   username: { type: String, default: '' },
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
+  profilePicture: {type: String, default: ''},
   salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
+  uberid: {type: String, default: ''},
   facebook: {},
   twitter: {},
   github: {},
   google: {},
-  linkedin: {}
+  linkedin: {},
+  uber: {}
 });
 
 /**
@@ -79,15 +85,15 @@ PuserSchema.path('email').validate(function (email, fn) {
   } else fn(true);
 }, 'Email already exists');
 
-PuserSchema.path('username').validate(function (username) {
-  if (this.skipValidation()) return true;
-  return username.length;
-}, 'Username cannot be blank');
-
-PuserSchema.path('hashed_password').validate(function (hashed_password) {
-  if (this.skipValidation()) return true;
-  return hashed_password.length;
-}, 'Password cannot be blank');
+//PuserSchema.path('username').validate(function (username) {
+//  if (this.skipValidation()) return true;
+//  return username.length;
+//}, 'Username cannot be blank');
+//
+//PuserSchema.path('hashed_password').validate(function (hashed_password) {
+//  if (this.skipValidation()) return true;
+//  return hashed_password.length;
+//}, 'Password cannot be blank');
 
 
 /**

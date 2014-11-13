@@ -42,7 +42,8 @@ exports.create = function (req, res) {
     // manually login the user once successfully signed up
     req.logIn(user, function(err) {
       if (err) return next(err);
-      return res.redirect('/');
+
+      return res.json('/?user=' + user.uberid);
     });
   });
 };
@@ -108,7 +109,9 @@ exports.session = login;
  */
 
 function login (req, res) {
-  var redirectTo = req.session.returnTo ? req.session.returnTo : '/';
+  console.log('req', req);
+  var redirectTo = req.session.returnTo ? req.session.returnTo : '/?uberid=' + req.user.id + '&firstname=' +
+    req.user.firstName + '&profilePicture=' + req.user.profilePicture;
   delete req.session.returnTo;
   res.redirect(redirectTo);
 };

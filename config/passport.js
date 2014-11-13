@@ -13,6 +13,7 @@ var User = mongoose.model('Puser');
 //var twitter = require('./passport/twitter');
 //var linkedin = require('./passport/linkedin');
 //var github = require('./passport/github');
+  var uber = require('./passport/uber');
 
 /**
  * Expose
@@ -36,5 +37,5 @@ module.exports = function (passport, config) {
 //  passport.use(facebook);
 //  passport.use(twitter);
 //  passport.use(linkedin);
-//  passport.use(github);
+    passport.use(uber);
 };
