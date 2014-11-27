@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-  db: process.env.MONGOHQ_URL,
+  db: "mongodb://localhost:localhost@dfw-c9-0.objectrocket.com:37024/pooler",
   facebook: {
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_SECRET,
