@@ -8,7 +8,8 @@
     "angular-local-storage": "~0.1.5",
     "ngAutocomplete": "~1.0.0",
     "ion-google-place": "~0.0.1",
-    "angular-moment": "~0.8.2"
+    "angular-moment": "~0.8.2",
+    "ngCordova": "~0.1.7-alpha"
   },
   "resolutions": {
     "angular": "1.2.26"

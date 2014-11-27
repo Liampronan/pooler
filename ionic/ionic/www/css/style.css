@@ -566,3 +566,9 @@ textarea.message-reply{
 ion-content.has-header{
     background: rgba(32, 50, 69, .105)
 }
+
+.meetup-time-request{
+    position: relative;
+    /*margin-top: 0px !important;*/
+    top: -2px;
+}

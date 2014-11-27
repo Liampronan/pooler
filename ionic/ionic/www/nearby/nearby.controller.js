@@ -4,11 +4,12 @@ ctrlModule
                              'nearbyService', '$ionicModal', '$state', '$ionicPopup',
     function ($scope, $ionicLoading, $compile, GoogleMapApi, $filter, nearbyService, $ionicModal, $state, $ionicPopup) {
       var coords = {};
-      getNearbyTrips();
 
       nearbyService.getUserCoords().then(function(position){
-        coords.latitude = position.coordinates.latitude;
-        coords.longitude = position.coordinates.longitude;
+        coords.latitude = position.coords.latitude;
+        coords.longitude = position.coords.longitude;
+        getNearbyTrips();
+
         GoogleMapApi.then(function (maps) {
           $scope.map = {
             center: { latitude: coords.latitude, longitude: coords.longitude },

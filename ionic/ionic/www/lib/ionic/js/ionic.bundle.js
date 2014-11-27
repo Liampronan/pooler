@@ -39812,6 +39812,9 @@ function($scope, scrollViewOptions, $timeout, $window, $$scrollValueCache, $loca
 
   if (!angular.isDefined(scrollViewOptions.bouncing)) {
     ionic.Platform.ready(function() {
+      if(!scrollView){
+        return;
+      }
       scrollView.options.bouncing = true;
 
       if(ionic.Platform.isAndroid()) {

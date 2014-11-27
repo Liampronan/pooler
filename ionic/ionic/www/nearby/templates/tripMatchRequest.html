@@ -1,5 +1,5 @@
 <ion-content overflow-scroll="true" >
-  <ion-list class="trip-days trip-match-request">
+  <ion-list class="trip-days trip-match-request" >
 
     <div class="trip-modal list card">
       <div class="item item-divider item-royal">
@@ -12,7 +12,7 @@
           <div class="picture-container">
 
             <div class="profile round">
-              <img ng-src="{{ matchMarker.userProfilePicture }}" alt=""/>
+              <img ng-src="{{ matchMarker.userProfilePicture }}" alt="" ng-if="matchMarker.userProfilePicture" />
             </div>
             <h4 class="text-center small-margin-top col">{{ matchMarker.userFirstName }}</h4>
           </div>
@@ -51,18 +51,18 @@
         <div class="col col-offset-20 no-padding-top no-padding-bottom">
           <label class="item item-input input-height-fix no-border no-padding-top" >
             <span class="input-label text-color-black meetup-label">Meetup Time:</span>
-            <input type="time" class="margin-top-8-percent" ng-model="matchMarker.tripInfo.requestInfo.departureTime">
+            <input type="time" class="margin-top-8-percent meetup-time-request" ng-model="matchMarker.tripInfo.requestInfo.departureTime">
           </label>
         </div>
       </div>
 
       <div class="row">
-        <div class="margin-auto no-margin-top">
-          <button class="button button-light text-center meetup-request button-small"
+        <div class="margin-auto no-margin-top row">
+          <button class="button button-light text-center meetup-request button-small col"
                   ng-click="closeTripMatchRequestModal()">
             Cancel
           </button>
-          <button class="text-center button button-energized meetup-request button-small"
+          <button class="text-center button button-energized meetup-request button-small col"
                   ng-click="requestTrip(matchMarker.tripInfo.tripInfo, matchMarker.user, matchMarker.tripInfo.requestInfo)">
             <i class="icon ion-ios7-paperplane placeholder-icon"></i>
             Send Trip Request

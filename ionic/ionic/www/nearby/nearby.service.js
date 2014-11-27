@@ -1,7 +1,7 @@
 angular.module('pooler')
   .service('nearbyService', ['$http', '$stateParams', '$q', '$location', '$rootScope', 'API_HOST', '$state', 'userService',
-    '$ionicPlatform', '$cordovaGeolocation',
-    function ($http, $stateParams, $q, $location, $rootScope, API_HOST, $state, userService, $ionicPlatform, $cordovaGeolocation) {
+    '$ionicPlatform', '$cordovaGeolocation', '$window',
+    function ($http, $stateParams, $q, $location, $rootScope, API_HOST, $state, userService, $ionicPlatform, $cordovaGeolocation, $window) {
       var data = {
 
         },
@@ -13,10 +13,19 @@ angular.module('pooler')
 
         if (data['position']){
             deferred.resolve(data['position']);
+          console.log(data['position']);
         } else {
             setUserCoords().then(function(position){
+//            var position = {
+//              coords: {
+//                latitude: 37,
+//                longitude: -122
+//              }
+//            }
             deferred.resolve(position);
-          })
+            console.log(position);
+
+            })
         }
 
         return deferred.promise;
@@ -24,20 +33,20 @@ angular.module('pooler')
 
       function setUserCoords(){
         var deferred = $q.defer();
-        $ionicPlatform.ready(function() {
-          $cordovaGeolocation
-            .getCurrentPosition()
-            .then(function (position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
 //              var lat  = position.coords.latitude,
 //                  long = position.coords.longitude;
-                data['position'] = position;
-                deferred.resolve(position)
-            }, function(err) {
-              // error
-            });
+          data['position'] = position;
+          deferred.resolve(position)
+        }, function(err) {
+          // error
+          console.log('errr', err);
+          deferred.reject(err);
         });
 
         return deferred.promise
+
+
       }
 
 

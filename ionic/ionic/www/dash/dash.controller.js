@@ -1,7 +1,7 @@
 var ctrlModule = angular.module('pooler.controllers');
   ctrlModule
-    .controller('DashCtrl', ['$scope', 'uberAuthService', 'userService', '$state', '$ionicPopup',
-      function($scope, uberAuthService, userService, $state, $ionicPopup) {
+    .controller('DashCtrl', ['$scope', 'uberAuthService', 'userService', '$state', '$ionicPopup', 'nearbyService',
+      function($scope, uberAuthService, userService, $state, $ionicPopup, nearbyService) {
         userService.setUser().then(function(user){
           $scope.user = user;
           if ($scope.user.uberid){
