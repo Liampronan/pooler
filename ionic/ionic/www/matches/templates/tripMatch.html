@@ -1,0 +1,117 @@
+<div class="trip-modal list card no-margin-bottom">
+  <div class="row">
+    <div class="">
+      <div class="picture-container">
+        <div class="profile round">
+          <img ng-src="{{ tripMatchUser.picture || tripMatchUser.profilePicture }}" alt=""/>
+        </div>
+        <h4 class="text-center small-margin-top col">{{ tripMatchUser.first_name || tripMatchUser.firstName }}</h4>
+      </div>
+
+
+      <div class="col inline-block match-trip">
+
+        <span class="item button trip-select  no-margin no-border background-transparent">
+          <ul class="text-left matches-trip-match">
+
+            <li><b>Depart:</b> {{ tripMatchUserTrip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}</li>
+            <li><b>Arrive:</b> {{ tripMatchUserTrip.arrivalLocation.formattedAddress | formatStreetAddress  }}</li>
+            <li><b>Time:</b> {{ tripMatchUserTrip.departureTime| formatTime }}</li>
+            <li><b>Buffer:</b> +/- {{ tripMatchUserTrip.bufferWindow }} min</li>
+            <li ng-if="trip.recurring">
+              <b>{{ tripMatchUserTrip.days | pluralizeDay }}</b>: {{ tripMatchUserTrip.days | showTripDays }}
+            </li>
+            <li ng-if="!trip.recurring">
+              <b>Date</b>: {{ tripMatchUserTrip.date | formatDateOnetimeTrip }}
+            </li>
+          </ul>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    <p class="text-center light-font" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip">
+      To request a trip, choose a meetup point and time
+    </p>
+
+
+    <div class="row" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip">
+      <div class="margin-auto">
+        <button class="text-center button button-small meetup-point" ng-click="showSelectMeetupPointModal()">
+          <i class="icon ion-pin placeholder-icon"></i>
+          {{ markers[2].setByUser ? "Change" : "Select" }} Meetup Point
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="row no-padding-bottom">
+    <div class="col col-offset-20 no-padding-top">
+      <p ng-if="markers[2].setByUser || tripMatch.userTrip.isMatchTrip || tripMatch.requestInfo.isMatchTrip"
+         class="meet-at trip-match-color no-margin-bottom trip-info-text">
+        <b>Meet at:</b>
+        {{ (markers[2].meetupPoint.formatted_address || tripMatch.requestInfo.departureAddress)
+        | formatStreetAddress | displayStreet
+        }}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-offset-20 no-padding-top">
+      <label class="item item-input input-height-fix no-border no-padding-top background-transparent" >
+        <span class="input-label trip-match-color meetup-label">Meetup Time:</span>
+        <input type="time" class="meetup-time trip-info-text" ng-model="tripMatch.requestInfo.departureTime">
+      </label>
+    </div>
+  </div>
+
+
+
+  <div class="row" ng-if="!tripMatch.requestInfo.requestorid">
+    <div class="margin-auto">
+      <button class="text-center button button-energized meetup-request"
+        ng-disabled="!trip.request.departureTime || !markers[2].setByUser">
+        <i class="icon ion-ios7-paperplane placeholder-icon"></i>
+        Send Trip Request
+      </button>
+    </div>
+  </div>
+
+  <div class="row" ng-if="tripMatch.requestInfo.requestorid === user.uberid && !tripMatch.requestInfo.accepted">
+    <div class="margin-auto">
+      <button class="text-center button button-energized meetup-request disabled">
+        <i class="icon ion-android-checkmark placeholder-icon"></i>
+        Trip Request Pending
+      </button>
+    </div>
+  </div>
+
+  <div class="row"
+       ng-if="tripMatch.requestInfo.requestorid && tripMatch.requestInfo.requestorid !== user.uberid && !tripMatch.requestInfo.accepted">
+    <div class="margin-auto">
+      <button class="text-center button button-energized meetup-request" ng-click="acceptRequest()">
+        <i class="icon ion-android-checkmark placeholder-icon"></i>
+        Accept Request
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row"
+       ng-if="tripMatch.requestInfo.accepted">
+    <div class="margin-auto">
+      <button class="text-center button button-balanced meetup-request button-clear icon-left  ion-android-checkmark" ng-click="acceptRequest()">
+        <!--<i class="icon placeholder-icon"></i>-->
+        Accepted
+      </button>
+    </div>
+  </div>
+
+  <message ng-if="tripMatch.requestInfo.accepted"></message>
+
+</div>

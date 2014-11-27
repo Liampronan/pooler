@@ -1,0 +1,26 @@
+<ion-content overflow-scroll="true" class="trip-days-modal">
+  <ion-list class="trip-days">
+
+    <div class="item item-divider item-royal">
+      <span class="modal-title">
+        Select Days for this Trip
+      </span>
+      <i class="icon ion-close-circled modal-close" ng-click="closeSelectTripDaysModal()"></i>
+
+    </div>
+
+    <li class="item item-checkbox" ng-repeat="day in availableDays">
+      <label class="checkbox checkbox-royal">
+        <input type="checkbox" ng-model="trip.days[$index]">
+      </label>
+      {{day}}
+    </li>
+
+    <button class="button button-full button-royal no-margin" ng-class="{'disabled': !tripDaySelected()}"
+            ng-click="closeSelectTripDaysModal()">
+      Done Selecting
+    </button>
+
+  </ion-list>
+</ion-content>
+

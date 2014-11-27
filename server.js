@@ -7,14 +7,38 @@
 /**
  * Module dependencies
  */
+var express = require('express');
+
+var app = express();
+
+// Add headers
+app.use(function (req, res, next) {
+
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+//  res.setHeader('Access-Control-Allow-Origin', 'http://hitcher.us');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
+app.options("*", function(req,res,next){res.send(200)});
+
 
 var fs = require('fs');
-var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('./config/config');
 
-var app = express();
 var port = process.env.PORT || 9000;
 
 // Connect to mongodb
@@ -40,6 +64,7 @@ require('./config/express')(app, passport);
 
 // Bootstrap routes
 require('./config/routes')(app, passport);
+
 
 app.listen(port);
 console.log('Express app started on port ' + port);

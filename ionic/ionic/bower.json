@@ -1,7 +1,13 @@
-{
+x {
   "name": "newApp",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-beta.13"
+  },
+  "dependencies": {
+    "angular-local-storage": "~0.1.5",
+    "ngAutocomplete": "~1.0.0",
+    "ion-google-place": "~0.0.1",
+    "angular-moment": "~0.8.2"
   }
 }

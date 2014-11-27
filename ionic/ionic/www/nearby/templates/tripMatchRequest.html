@@ -1,0 +1,79 @@
+<ion-content overflow-scroll="true" >
+  <ion-list class="trip-days trip-match-request">
+
+    <div class="trip-modal list card">
+      <div class="item item-divider item-royal">
+        <i class="icon ion-close-circled modal-close trip-match-request" ng-click="closeTripMatchRequestModal()"></i>
+
+        Join {{ matchMarker.userFirstName }}'s Trip
+      </div>
+      <div class="row">
+        <div class="">
+          <div class="picture-container">
+
+            <div class="profile round">
+              <img ng-src="{{ matchMarker.userProfilePicture }}" alt=""/>
+            </div>
+            <h4 class="text-center small-margin-top col">{{ matchMarker.userFirstName }}</h4>
+          </div>
+
+
+          <div class="col inline-block match-trip">
+
+        <span class="item button trip-select no-margin no-border background-transparent">
+          <ul class="text-left trip-match-request-info">
+
+            <li><b>Depart:</b>
+              {{ matchMarker.tripInfo.departureAddress | formatStreetAddress | displayStreet }}
+            </li>
+            <li><b>Arrive:</b>
+              {{ matchMarker.tripInfo.arrivalAddress | formatStreetAddress | displayStreet }}
+            </li>
+            <li><b>Time:</b> {{ matchMarker.tripInfo.departureTime| formatTime }}</li>
+            <li><b>Buffer:</b> +/-{{ matchMarker.tripInfo.bufferWindow }} min.</li>
+            <li ng-if="matchMarker.tripInfo.recurring">
+              <b>{{ matchMarker.tripInfo.days | pluralizeDay }}</b>: {{ matchMarker.tripInfo.days | showTripDays }}
+            </li>
+            <li ng-if="!matchMarker.tripInfo.recurring">
+              <b>Date</b>: {{  matchMarker.tripInfo.date | formatDateOnetimeTrip }}
+            </li>
+          </ul>
+        </span>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center light-font no-margin-bottom">
+        Choose a meetup time within {{ matchMarker.userFirstName }}'s buffer window
+      </p>
+
+      <div class="row no-padding-top no-padding-bottom">
+        <div class="col col-offset-20 no-padding-top no-padding-bottom">
+          <label class="item item-input input-height-fix no-border no-padding-top" >
+            <span class="input-label text-color-black meetup-label">Meetup Time:</span>
+            <input type="time" class="margin-top-8-percent" ng-model="matchMarker.tripInfo.requestInfo.departureTime">
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="margin-auto no-margin-top">
+          <button class="button button-light text-center meetup-request button-small"
+                  ng-click="closeTripMatchRequestModal()">
+            Cancel
+          </button>
+          <button class="text-center button button-energized meetup-request button-small"
+                  ng-click="requestTrip(matchMarker.tripInfo.tripInfo, matchMarker.user, matchMarker.tripInfo.requestInfo)">
+            <i class="icon ion-ios7-paperplane placeholder-icon"></i>
+            Send Trip Request
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </ion-list>
+</ion-content>
+

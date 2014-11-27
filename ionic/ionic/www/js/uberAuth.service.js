@@ -1,8 +1,8 @@
 //https://login.uber.com/oauth/authorize
 
 angular.module('pooler')
-  .service('uberAuthService', ['$http', '$stateParams', '$q', '$location', 'API_HOST', '$window',
-    function ($http, $stateParams, $q, $location, API_HOST, $window) {
+  .service('uberAuthService', ['$http', '$stateParams', '$q', '$location', 'API_HOST', '$window', 'userService',
+    function ($http, $stateParams, $q, $location, API_HOST, $window, userService) {
       var clientId = "v8eZpgMwr5r8Hvw2FUub8oRESYrbNICH",
           _this = this,
         authUrl = API_HOST + '/auth/uber/',
@@ -18,19 +18,9 @@ angular.module('pooler')
           //grab linkedin authcode from url response
           getAuthCodeFromResponse(browserWindow)
             .then(function (success) {
-              console.log(authCode);
-              $http.get(API_HOST + '/api/auth/linkedinAuth?authCode=' + authCode).then(function (success) {
-                console.log(success);
-                var linkedInUser = success.data;
-                userService.create(linkedInUser).then(function (success) {
-                  var user = success;
-                  deferred.resolve(user);
-                }, function (error) {
-
-                })
-              }, function (error) {
-                console.log(error);
-              })
+              console.log(userProfile);
+              userService.setUser(userProfile);
+              console.log('gotten user: ', userService.getUser());
             }, function (err) {
 
             })
@@ -44,22 +34,21 @@ angular.module('pooler')
 
       // function called when the browser is closed
       function browserOnClose(output) {
-        console.log('inonclose');
 //      get code from response url
 //        var code = output.url.toString(), //non-google hack
-        console.log('urlIn', output.url);
+//        var code = output.url[0].toString(),
         var code = output.url[0].toString(),
-          firstNameRegex = /\?firstName=(.*)/,
-          uberIdRegex = /&uberid=(.*)/,
+          uberIdRegex = /uberId=(.*)&f/,
+          firstNameRegex = /&firstName=(.*)&/,
           profilePictureRegex = /&profilePicture=(.*)/,
           firstName = code.match(firstNameRegex)[1],
           uberId = code.match(uberIdRegex)[1],
           profilePicture = code.match(profilePictureRegex)[1],
-          user = { firstName: firstName, uberId: uberId, profilePicture: profilePicture };
+          user = { firstName: firstName, uberid: uberId, profilePicture: profilePicture };
 
         console.log('user', user);
         console.log('user', user.firstName);
-        console.log('user', user.uberId);
+        console.log('user', user.uberid);
         console.log('user', user.profilePicture);
         userProfile = user;
       }

@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns()])
+angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns(), 'LocalStorageModule',
+    'ion-google-place', 'angularMoment'])
 
 .constant('API_HOST', 'http://localhost:9000')
 
@@ -46,6 +47,26 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
       }
     })
 
+    .state('tab.dash-home-logged-in', {
+      url: '/dashHomeLoggedIn',
+      views: {
+        'tab-dash': {
+          templateUrl: 'dash/templates/dashHomeLoggedIn.html',
+          controller: 'DashCtrl'
+        }
+      }
+    })
+
+    .state('tab.dash-edit-trip', {
+      url: '/dashEditTrip?tripIndex',
+      views: {
+        'tab-dash': {
+          templateUrl: 'dash/templates/editTrip.html',
+          controller: 'DashTripCtrl'
+        }
+      }
+    })
+
     .state('tab.nearby', {
       url: '/nearby',
       views: {
@@ -57,7 +78,7 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
     })
 
     .state('tab.matches', {
-      url: '/matches',
+      url: '/matches?tripIndex',
       views: {
         'tab-matches': {
           templateUrl: 'matches/templates/tab-matches.html',

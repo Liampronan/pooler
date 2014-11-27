@@ -1,5 +1,7 @@
 <ion-view title="Matches">
-  <ion-content class="padding">
-
+  <ion-content class="padding" ng-show="loaded">
+    <trip-selector></trip-selector>
+    <no-matches ng-if="user.matches.length === 0 || !tripMatch"></no-matches>
+    <trip-match ng-if="tripMatch"></trip-match>
   </ion-content>
 </ion-view>

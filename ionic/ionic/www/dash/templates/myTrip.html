@@ -1,0 +1,36 @@
+<div class="list card no-padding small-margin-bottom smaller-margin-top my-trip " ng-if="trip">
+  <div class="item item-divider bar bar-royal background-color-lighter-slate">
+    <span ng-if="!trip.recurring">{{ trip.date | formatDateOnetimeTrip }} at {{ trip.departureTime | formatTime }}</span>
+    <span ng-if="trip.recurring">Recurring: {{ trip.days | showTripDays}} at {{ trip.departureTime | formatTime }}</span>
+  </div>
+
+  <label class="item item-input ">
+    <span class="underline my-trip"><b>Depart:</b></span>
+    <input class="white-background small-margin-left my-trip text-center" type="text" readonly
+           value="{{ trip.departureLocation.formattedAddress | formatStreetAddress}}">
+  </label>
+
+  <label class="item item-input">
+    <span class="underline my-trip"><b>Arrive:</b></span>
+    <input class="white-background small-margin-left my-trip text-center" type="text" readonly
+           value="{{  trip.arrivalLocation.formattedAddress | formatStreetAddress }}">
+  </label>
+
+  <div class="item tabs tabs-secondary tabs-icon-left">
+
+    <a class="tab-item col-25" ui-sref="tab.dash-edit-trip({tripIndex: tripIndex})">
+      <i class="icon ion-edit"></i>
+    </a>
+
+    <a class="tab-item" ui-sref="tab.matches({tripIndex: tripIndex})">
+      <i class="icon ion-android-social"></i>
+      <span class="badge badge-royal matches">0</span>
+      <span class="matches-text">Matches</span>
+    </a>
+
+    <a class="tab-item col-25" ng-click="showDeleteConfirm(trip)">
+      <i class="icon ion-trash-b"></i>
+    </a>
+  </div>
+
+</div>

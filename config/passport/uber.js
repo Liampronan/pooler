@@ -19,7 +19,7 @@ module.exports = new UberStrategy({
     console.log('access toke', accessToken );
     console.log('profileid', profile.id);
     console.log('profile', profile);
-    User.load(options, function (err, user) {
+    User.findOne(options, function (err, user) { //TODO: test change from load to findOne for creating new user
       if (err) return done(err);
       if (!user) {
         user = new User({
@@ -38,6 +38,7 @@ module.exports = new UberStrategy({
           return done(err, user);
         });
       } else {
+        console.log(user);
         return done(err, user);
       }
     });

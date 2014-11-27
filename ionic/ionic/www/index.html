@@ -9,6 +9,7 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700' rel='stylesheet' type='text/css'>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/ionic_and_overrides.css" rel="stylesheet">
+    <link href="lib/ion-google-place/ion-google-place.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -26,15 +27,33 @@
 
     <script src="www/lib/lodash/dist/lodash.min.js"></script>
     <script src="js/angular-google-maps.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,drawing,geometry&sensor=false"></script>
+
     <!-- your app's js -->
+
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/filters.js"></script>
     <script src="js/uberAuth.service.js"></script>
     <script src="dash/dash.controller.js"></script>
+    <script src="dash/noTrips.directive.js"></script>
+    <script src="dash/editTrip.directive.js"></script>
+    <script src="dash/dash-edit-trip.controller.js"></script>
+    <script src="dash/myTrip.directive.js"></script>
     <script src="nearby/nearby.controller.js"></script>
     <script src="matches/matches.controller.js"></script>
-
+    <script src="js/user.service.js"></script>
+    <script src="js/messages.service.js"></script>
+    <script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="lib/ion-google-place/ion-google-place.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/angular-moment/angular-moment.js"></script>
+    <script src="matches/tripSelector.directive.js"></script>
+    <script src="matches/noMatches.directive.js"></script>
+    <script src="matches/tripMatch.directive.js"></script>
+    <script src="nearby/nearby.service.js"></script>
+    <script src="matches/message.directive.js"></script>
 
   </head>
   <body ng-app="pooler" animation="slide-left-right-ios7">

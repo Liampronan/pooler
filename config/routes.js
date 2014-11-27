@@ -7,6 +7,8 @@
 // set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
 
 var users = require('../server/controllers/users');
+var trips = require('../server/controllers/trips');
+var messages = require('../server/controllers/messages');
 var articles = require('../server/controllers/articles');
 var comments = require('../server/controllers/comments');
 var tags = require('../server/controllers/tags');
@@ -26,6 +28,16 @@ var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 module.exports = function (app, passport) {
 
   // user routes
+  app.post('/users/createTrip', users.createTrip);
+  app.post('/users/updateTrip', users.updateTrip);
+  app.get('/users/getTrips', users.getTrips);
+  app.delete('/users/deleteTrip', users.deleteTrip);
+  app.get('/users/getUser', users.getUser);
+  app.get('/trips/getNearby', trips.getNearby);
+  app.post('/trips/requestTrip', trips.requestTrip);
+  app.post('/trips/acceptRequest', trips.acceptRequest);
+  app.post('/messages/create', messages.create);
+  app.get('/messages/', messages.index);
   app.get('/login', users.login);
   app.get('/signup', users.signup);
   app.get('/logout', users.logout);
@@ -115,6 +127,7 @@ module.exports = function (app, passport) {
 
   // tag routes
   app.get('/tags/:tag', tags.index);
+
 
 
   /**

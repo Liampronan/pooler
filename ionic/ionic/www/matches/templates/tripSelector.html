@@ -1,0 +1,11 @@
+<label class="item item-input no-border background-transparent">
+  <span class="trip-select-label"><b>Trip:</b></span>
+
+  <button class="button button-small button-outline button-royal margin-auto " ng-click="showSelectTripModal()">
+    {{ trip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}
+    at {{ trip.departureTime | formatTime }}
+      <span ng-show="trips.length > 1">&nbsp;▼</span>
+  </button>
+
+</label>
+

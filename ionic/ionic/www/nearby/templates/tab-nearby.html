@@ -1,36 +1,45 @@
-<ion-view title="Pooler">
-  <ion-content >
+<ion-view title="Pooler" >
+  <ion-content>
     <div id="map_canvas">
       <ui-gmap-google-map center='map.center' zoom='map.zoom' data-tap-disabled="true">
-        <ui-gmap-marker ng-repeat="marker in markers"
+        <ui-gmap-marker ng-repeat="marker in markers" ng-if="markers"
           click="showWindow(marker.idKey)"
           idKey="marker.idKey"
           coords="marker.departCoords"
           options="marker.options" >
             <ui-gmap-window
               show="marker.windowOpts.visible"
-              closeClick="closeWindow(marker.idKey)" data-tap-disabled="true">
+              closeClick="closeWindow(marker.idKey)" >
               <div class="trip-modal">
                 <div class="row">
                   <div class="small-margin-top">
                     <div class="round">
-                      <img src="img/liam.jpeg" alt=""/>
+                      <img src="{{marker.userProfilePicture}}" alt=""/>
                     </div>
-                    <h5 class="text-center small-margin-top"><b>Liam</b></h5>
+                    <h5 class="text-center small-margin-top"><b>{{ marker.userFirstName }}</b></h5>
                   </div>
                   <div class="col trip-info">
-                    <b>Days:</b> M, T, W, Th
+                    <b>{{ marker.tripInfo.recurring ? "Days" : "Date" }}:</b>
+                    {{ marker.tripInfo.recurring ?
+                        (marker.tripInfo.days | showTripDays) :
+                        (marker.tripInfo.date | formatDateOnetimeTrip )
+                    }}
                     <br/>
-                    <b>Depart:</b> 7:15 am
+                    <b>Depart:</b> {{ marker.tripInfo.departureTime | formatTime }}
                     <br/>
-                    <b>Buffer:</b> +/- 15 min
+                    <b>Buffer:</b> +/-{{ marker.tripInfo.bufferWindow }} min.
                     <br/>
-                    <div class="destination-info"><b>Destination:</b> 4th and King, 94103</div>
+                    <div class="destination-info">
+                      <b>Destination:</b> {{ marker.tripInfo.arrivalAddress | formatStreetAddress | displayStreet }}
+                      </div>
                   </div>
+
                 </div>
-                <div class="row text-center">
-                  <div class="col col-offset-20">
-                    <button class="button button-small button-energized icon-left ion-plus-round join-ride">
+
+                <div class="row text-center no-padding-bottom" style="z-index: 10000000000000000" data-tap-disabled="false">
+                  <div class="col col-offset-20 no-padding-bottom" style="z-index: 10000000000000000">
+                    <button style="z-index: 10000000000000000" class="button button-small no-padding-bottom button-energized icon-left ion-plus-round larger-text-with-padding"
+                      ng-click="$parent.showTripMatchRequestModal($parent.marker)">
                       Join Ride
                     </button>
                   </div>

@@ -23,7 +23,7 @@ var oAuthTypes = [
 var PuserSchema = new Schema({
   name: { type: String, default: '' },
   firstName: {type: String, default: ''},
-  lastName: {type: String, defaults: ''},
+  lastName: {type: String, default: ''},
   email: { type: String, default: '' },
   username: { type: String, default: '' },
   provider: { type: String, default: '' },
@@ -37,7 +37,9 @@ var PuserSchema = new Schema({
   github: {},
   google: {},
   linkedin: {},
-  uber: {}
+  uber: {},
+  trips: [],
+  matches: []
 });
 
 /**
@@ -62,28 +64,28 @@ var validatePresenceOf = function (value) {
 };
 
 // the below 5 validations only apply if you are signing up traditionally
-
-PuserSchema.path('name').validate(function (name) {
-  if (this.skipValidation()) return true;
-  return name.length;
-}, 'Name cannot be blank');
-
-PuserSchema.path('email').validate(function (email) {
-  if (this.skipValidation()) return true;
-  return email.length;
-}, 'Email cannot be blank');
-
-PuserSchema.path('email').validate(function (email, fn) {
-  var User = mongoose.model('Puser');
-  if (this.skipValidation()) fn(true);
-
-  // Check only when it is a new user or when email field is modified
-  if (this.isNew || this.isModified('email')) {
-    User.find({ email: email }).exec(function (err, users) {
-      fn(!err && users.length === 0);
-    });
-  } else fn(true);
-}, 'Email already exists');
+//
+//PuserSchema.path('name').validate(function (name) {
+//  if (this.skipValidation()) return true;
+//  return name.length;
+//}, 'Name cannot be blank');
+//
+//PuserSchema.path('email').validate(function (email) {
+//  if (this.skipValidation()) return true;
+//  return email.length;
+//}, 'Email cannot be blank');
+//
+//PuserSchema.path('email').validate(function (email, fn) {
+//  var User = mongoose.model('Puser');
+//  if (this.skipValidation()) fn(true);
+//
+//  // Check only when it is a new user or when email field is modified
+//  if (this.isNew || this.isModified('email')) {
+//    User.find({ email: email }).exec(function (err, users) {
+//      fn(!err && users.length === 0);
+//    });
+//  } else fn(true);
+//}, 'Email already exists');
 
 //PuserSchema.path('username').validate(function (username) {
 //  if (this.skipValidation()) return true;
@@ -191,3 +193,4 @@ PuserSchema.statics = {
 }
 //this is really terrible, but since I'm limited to one OR DB, it's a necessary hack
 mongoose.model('Puser', PuserSchema );
+

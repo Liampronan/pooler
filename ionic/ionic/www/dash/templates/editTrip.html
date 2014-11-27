@@ -1,0 +1,107 @@
+<ion-view title="Pooler">
+  <ion-content class="padding">
+    <div class="home-section no-top-padding">
+      <div class="text-center">
+        <h3 class="text-center new-trip"><b>{{ isNewTrip ? "New Trip" : "Edit Trip" }}</b></h3>
+        <p class="new-trip"><b>Set up a trip to find rides</b></p>
+        <div class="list card trip-select">
+          <div class="row">
+            <div class="col">
+              <label class="item item-input item-stacked-label trip">
+
+              <ion-google-place placeholder="{{ (trip.departureLocation.formattedAddress | formatStreetAddress) || 'Departure Location' }}"
+                                ng-model="trip.departureLocation" value="departureLocation"/>
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label class="item item-input trip">
+                <ion-google-place placeholder="{{ (trip.arrivalLocation.formattedAddress | formatStreetAddress) || 'Arrival Location' }}" ng-model="trip.arrivalLocation"
+                                  value="arrivalLocation"/>
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label class="item item-input input-height-fix">
+                <span class="input-label trip">Departure Time</span>
+                <input type="time" class="text-center" ng-model="trip.departureTime">
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label class="item item-input input-height-fix">
+                <span  class="input-label trip" >
+                  Buffer Window (+/- min.)
+                </span>
+                <input type="number" class="trip-buffer-window" ng-model="trip.bufferWindow">
+              </label>
+              <i class="ion-icon ion-help-circled" ng-click="showBufferWindowPopup()"></i>
+            </div>
+          </div>
+
+          <div class="row text-center">
+            <button class="button col-offset-30 col button-small" ng-class="{ 'button-royal': !trip.recurring, 'button-stable': trip.recurring }"
+                    ng-click="switchTripType(false)">
+              One-time
+            </button>
+            <button class="button direction button-small col" ng-class="{ 'button-royal': trip.recurring, 'button-stable': !trip.recurring }"
+                    ng-click="switchTripType(true)">
+              Recurring
+            </button>
+          </div>
+
+          <div class="row" ng-if="trip.recurring">
+            <div class="col no-border">
+              <b>Days:</b>
+              <span>
+                {{tripDaySelected() ? (trip.days | showTripDays) : "None selected"}}
+              </span>
+              <br/>
+              <button class="button button-small button-royal" ng-click="showSelectTripDaysModal()">
+                {{ tripDaySelected() ? 'Change' : 'Select' }} Trip Days
+              </button>
+            </div>
+          </div>
+
+          <div class="row" ng-if="!trip.recurring">
+            <div class="col no-border">
+              <b>Date:</b>
+              <span >
+                {{ trip.date | formatDateOnetimeTrip }}
+              </span>
+              <br/>
+              <button class="button button-small button-royal" ng-click="showSelectTripDateModal()">
+                Change Trip Date
+              </button>
+            </div>
+          </div>
+          <!--TODO: ng-validate instead of fn()-->
+          <button class="button button-small button-energized add-trip" ng-disabled="!isReadyToSubmit()"
+                  ng-click="createTrip()" ng-if="isNewTrip">
+            Create Trip
+          </button>
+
+          <button class="button button-small button-energized add-trip" ng-disabled="!isReadyToSubmit()"
+                  ng-click="updateTrip()" ng-if="!isNewTrip">
+            Update Trip
+          </button>
+          <!--<button class="button button-small button-energized" ng-class="{disabled: !isReadyToSubmit()}"-->
+                  <!--ng-click="setupRoundTrip()" ng-hide="isRoundTrip || !isNewTrip">-->
+            <!--Round Trip-->
+          <!--</button>-->
+          <!--<button class="button button-small button-energized" ng-class="{disabled: !isReadyToSubmit()}"-->
+                  <!--ng-click="updateTrip()" ng-show="!isNewTrip">-->
+            <!--Update Trip-->
+          <!--</button>-->
+
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,54 @@
+<ion-content overflow-scroll="true" class="">
+  <ion-list>
+    <div class="list card no-padding message-modal">
+      <!--TODO: subject needed? multiple subjects?-->
+      <div class="item item-divider match text-center item-royal">
+        <i class="icon ion-close-circled modal-close" ng-click="closeMatchNewMessageModal()"></i>
+        Messages with {{ tripMatchUser.first_name || tripMatchUser.firstName }}
+      </div>
+      <div class="yo">
+        <div ng-repeat="message in messages" >
+          <div class="received-message commentArea" ng-if="message.fromUberid === (tripMatchUser.uuid || tripMatchUser.uberid)">
+            <div class="bubbledLeft">
+              {{ message.message }}
+
+            </div>
+          </div>
+
+          <!--TODO: check userId is fromId ?-->
+          <div class="sent-message commentArea" ng-if="message.fromUberid === (user.uberid)">
+            <div class="bubbledRight">
+              {{ message.message }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row background-stable">
+        <span class="underline black-text match-message-reply"><b>Message:</b></span>
+        <!--TODO: fix ng-model here.. sharing scopes b/w directives-->
+        <textarea ng-model="$parent.$parent.$parent.message" class="match message-reply item-text-wrap background-stable">
+
+        </textarea>
+      </div>
+      <div class="row no-padding">
+        <div class="col-50">
+          <button class="button no-margin icon-right ion-close-round button-stable button-full border-transparent"
+                  ng-click="closeMatchNewMessageModal()">
+            Cancel
+          </button>
+        </div>
+        <div class="col-50">
+          <!--TODO: fix $scope here.. sharing scopes b/w directives-->
+
+          <button class="button no-margin icon-right ion-android-mail button-energized button-full border-transparent" ng-click="sendMessage()"
+                  ng-disabled="!$parent.$parent.$parent.message">
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+  </ion-list>
+</ion-content>
