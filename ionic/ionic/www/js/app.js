@@ -8,7 +8,7 @@
 angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns(), 'LocalStorageModule',
     'ion-google-place', 'angularMoment'])
 
-.constant('API_HOST', 'http://localhost:9000')
+.constant('API_HOST', 'https://liampronan.com')
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
