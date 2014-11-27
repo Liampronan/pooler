@@ -10,7 +10,7 @@ var SECRET = 'AIS652KQo97pDD2l5o4xYBNlxxo1HXA4t-rWpbmM';
 module.exports = new UberStrategy({
     clientID: ID,
     clientSecret: SECRET,
-    callbackURL: "http://localhost:9000/auth/uber/callback"
+    callbackURL: "https://liampronan.com/auth/uber/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     var options = {
