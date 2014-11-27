@@ -11,7 +11,7 @@ var express = require('express');
 
 var app = express();
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //self-signed SSL fix YOLO.. TODO: look more into/fix
 
 // Add headers
 app.use(function (req, res, next) {

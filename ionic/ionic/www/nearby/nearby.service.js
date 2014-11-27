@@ -1,10 +1,44 @@
 angular.module('pooler')
   .service('nearbyService', ['$http', '$stateParams', '$q', '$location', '$rootScope', 'API_HOST', '$state', 'userService',
-    function ($http, $stateParams, $q, $location, $rootScope, API_HOST, $state, userService) {
+    '$ionicPlatform', '$cordovaGeolocation',
+    function ($http, $stateParams, $q, $location, $rootScope, API_HOST, $state, userService, $ionicPlatform, $cordovaGeolocation) {
       var data = {
 
         },
         _this = this;
+      setUserCoords();
+
+      this.getUserCoords = function(){
+        var deferred = $q.defer();
+
+        if (data['position']){
+            deferred.resolve(data['position']);
+        } else {
+            setUserCoords().then(function(position){
+            deferred.resolve(position);
+          })
+        }
+
+        return deferred.promise;
+      }
+
+      function setUserCoords(){
+        var deferred = $q.defer();
+        $ionicPlatform.ready(function() {
+          $cordovaGeolocation
+            .getCurrentPosition()
+            .then(function (position) {
+//              var lat  = position.coords.latitude,
+//                  long = position.coords.longitude;
+                data['position'] = position;
+                deferred.resolve(position)
+            }, function(err) {
+              // error
+            });
+        });
+
+        return deferred.promise
+      }
 
 
       this.getTrips = function(coords, searchDistance){

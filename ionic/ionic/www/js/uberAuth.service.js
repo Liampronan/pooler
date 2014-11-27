@@ -5,7 +5,7 @@ angular.module('pooler')
     function ($http, $stateParams, $q, $location, API_HOST, $window, userService) {
       var clientId = "v8eZpgMwr5r8Hvw2FUub8oRESYrbNICH",
           _this = this,
-        authUrl = API_HOST + '/auth/uber/',
+        authUrl = "https://liampronan.com" + '/auth/uber/',
         userProfile;
 
 

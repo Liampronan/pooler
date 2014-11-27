@@ -92,11 +92,14 @@ exports.acceptRequest = function(req, res){
 function removeUserTrips(trips, userUberid){
   var otherUserTrips = [];
   console.log(userUberid);
-  trips.forEach(function(trip){
-    if(trip.user.uuid !== userUberid){
-      otherUserTrips.push(trip)
-    }
-  })
+  if (trips){
+    trips.forEach(function(trip){
+      if(trip.user.uuid !== userUberid){
+        otherUserTrips.push(trip)
+      }
+    })
+  }
+
   return otherUserTrips
 }
 

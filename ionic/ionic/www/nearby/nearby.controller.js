@@ -3,11 +3,19 @@ ctrlModule
   .controller('NearbyCtrl', ['$scope', '$ionicLoading', '$compile', 'GoogleMapApi'.ns(), '$filter',
                              'nearbyService', '$ionicModal', '$state', '$ionicPopup',
     function ($scope, $ionicLoading, $compile, GoogleMapApi, $filter, nearbyService, $ionicModal, $state, $ionicPopup) {
-      var coords = {
-                    latitude: 37.796207599999995,
-                    longitude: -122.4100767
-                   };
+      var coords = {};
       getNearbyTrips();
+
+      nearbyService.getUserCoords().then(function(position){
+        coords.latitude = position.coordinates.latitude;
+        coords.longitude = position.coordinates.longitude;
+        GoogleMapApi.then(function (maps) {
+          $scope.map = {
+            center: { latitude: coords.latitude, longitude: coords.longitude },
+            zoom: 14
+          };
+        });
+      })
 
       $scope.requestTrip = function(requestedTripInfo, requestedUserInfo, requestInfo){
         nearbyService.requestTrip(requestedTripInfo, requestedUserInfo, requestInfo).then(function(){
@@ -38,12 +46,7 @@ ctrlModule
         });
       }
 
-      GoogleMapApi.then(function (maps) {
-        $scope.map = {
-          center: { latitude: coords.latitude, longitude: coords.longitude },
-          zoom: 14
-        };
-      });
+
 //    workaround for buttons in google maps
       $scope.dataTapDisabled = true;
 

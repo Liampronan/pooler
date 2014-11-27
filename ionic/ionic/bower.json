@@ -1,4 +1,4 @@
-x {
+{
   "name": "newApp",
   "private": "true",
   "devDependencies": {
@@ -9,5 +9,8 @@ x {
     "ngAutocomplete": "~1.0.0",
     "ion-google-place": "~0.0.1",
     "angular-moment": "~0.8.2"
+  },
+  "resolutions": {
+    "angular": "1.2.26"
   }
 }

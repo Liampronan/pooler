@@ -6,9 +6,9 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns(), 'LocalStorageModule',
-    'ion-google-place', 'angularMoment'])
+    'ion-google-place', 'angularMoment', 'ngCordova'])
 
-.constant('API_HOST', 'https://liampronan.com')
+.constant('API_HOST', 'https://liampronan.com/api')
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -97,7 +97,6 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
   });
   // Override the Android platform default to add "tabs-striped" class to "ion-tabs" elements.
   $ionicTabsConfig.type = '';
-
 
 
 
