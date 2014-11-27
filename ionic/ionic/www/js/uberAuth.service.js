@@ -63,7 +63,7 @@ angular.module('pooler')
             var _url = url.toString();
 
             // we check if the callback page was reached
-            if (_url.indexOf("localhost") > -1 && _url.indexOf('.uber.com') === -1) {
+            if (_url.indexOf("liampronan.com") > -1 && _url.indexOf('.uber.com') === -1) {
               console.log('URLL', _url);
               // the callback page was reached therefore it contains the json output returned from the server
               // we parse the html page to strip out the html tags and keep the json string

@@ -11,6 +11,8 @@ var express = require('express');
 
 var app = express();
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 // Add headers
 app.use(function (req, res, next) {
 
