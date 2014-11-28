@@ -8,7 +8,6 @@ app.filter('showTripDays', function ($translate) {
       langKey = $translate.use(),
       output = "";
 
-    console.log(langKey);
     if (langKey === 'en'){
       days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     } else if (langKey === 'zh'){

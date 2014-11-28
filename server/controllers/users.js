@@ -8,7 +8,12 @@ var User = mongoose.model('Puser');
 var Trip  = mongoose.model('Trip');
 var ObjectId = require('mongoose').Types.ObjectId;
 var utils = require('../../lib/utils');
+var EventEmitter = require('events').EventEmitter,
+    tripMatchEmitter;
+
 mongoose.set('debug', true);
+
+exports.tripMatchEmitter = tripMatchEmitter = new EventEmitter();
 
 /**
  * Load
@@ -116,7 +121,7 @@ exports.createTrip = function (req, res) {
 
   User.findOne({uberid: uberid}, function(err, user){
     if (err) return console.error(err)
-    //TODO: check to make sure trip doens't already exist
+    //TODO: check to make sure trip doesn't already exist
 //    user.trips.push(trip);
     var trip = new Trip;
     tripInfo['_id'] = id;
@@ -323,14 +328,19 @@ function checkForTripMatch(tripInfo, userUberid, tripWithUser){
   ]},
     function(err, matchTrips){
       if (err) console.error(err)
-      var otherUserMatchTrips = removeUserTrips(matchTrips, userUberid);
+      var otherUserMatchTrips = removeUserTrips(matchTrips, userUberid),
+          matchUsersUberids = [userUberid]; //store ids for push notifications
       console.log(otherUserMatchTrips);
       otherUserMatchTrips.forEach(function(matchTrip){
         var matchId = Math.random().toString(36).substr(2, 9);
         addToUserMatches(userUberid, matchTrip, matchId, tripWithUser);
         addToUserMatches(matchTrip.user.uuid, tripWithUser, matchId, matchTrip);
+        matchUsersUberids.push(matchTrip.user.uuid);
       })
-      //TODO: tripMatchEmitter
+      if (matchUsersUberids.length > 1){
+        tripMatchEmitter.emit('tripMatch', matchUsersUberids);
+      }
+
       return otherUserMatchTrips;
     }
   )
