@@ -1,11 +1,13 @@
 var ctrlModule = angular.module('pooler.controllers');
   ctrlModule
-    .controller('DashCtrl', ['$scope', 'uberAuthService', 'userService', '$state', '$ionicPopup', 'nearbyService', '$translate', '$timeout',
-      function($scope, uberAuthService, userService, $state, $ionicPopup, nearbyService, $translate, $timeout) {
+    .controller('DashCtrl', ['$scope', 'uberAuthService', 'userService', '$state', '$ionicPopup', 'nearbyService',
+      '$translate', '$ionicViewService',
+      function($scope, uberAuthService, userService, $state, $ionicPopup, nearbyService, $translate, $ionicViewService) {
         userService.setUser().then(function(user){
           $scope.user = user;
           if ($scope.user.uberid){
             $state.go('tab.dash-home-logged-in');
+            $ionicViewService.clearHistory(); // clear history so user doesn't see back (that would redirect back here)
             $scope.trips = userService.getTrips();
             if ($scope.trips && $scope.trips.length > 0){
               $scope.tripIndex = 0;
@@ -26,6 +28,7 @@ var ctrlModule = angular.module('pooler.controllers');
         $scope.setLanguage = function(langKey){
           $translate.use(langKey);
           $scope.selectedLangKey = $translate.use();
+          //when changing language, also change moment's locale for localized formatting
           if (langKey === 'zh'){
             moment.locale('zh-cn');
           } else if (langKey === 'en'){

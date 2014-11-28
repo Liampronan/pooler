@@ -579,3 +579,7 @@ ion-content.has-header{
     /*margin-top: 0px !important;*/
     top: -2px;
 }
+/*back-button-fix for android*/
+.button-icon.ion-ios7-arrow-back{
+    width: 20% !important;
+}
