@@ -33,6 +33,7 @@
     <!-- your app's js -->
 
     <script src="js/app.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
     <script src="js/filters.js"></script>
@@ -49,12 +50,14 @@
     <script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="lib/ion-google-place/ion-google-place.js"></script>
     <script src="lib/moment/moment.js"></script>
+    <script src="lib/moment/locale/zh-cn.js"></script>
     <script src="lib/angular-moment/angular-moment.js"></script>
     <script src="matches/tripSelector.directive.js"></script>
     <script src="matches/noMatches.directive.js"></script>
     <script src="matches/tripMatch.directive.js"></script>
     <script src="nearby/nearby.service.js"></script>
     <script src="matches/message.directive.js"></script>
+    <script src="lib/angular-translate/angular-translate.min.js"></script>
 
   </head>
   <body ng-app="pooler" animation="slide-left-right-ios7">
@@ -63,7 +66,7 @@
     -->
     <ion-nav-bar class="bar-royal nav-title-slide-ios7">
       <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
-        Back
+        {{ 'BACK' | translate }}
       </ion-nav-back-button>
     </ion-nav-bar>
     <!-- 

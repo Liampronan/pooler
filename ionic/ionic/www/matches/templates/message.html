@@ -1,13 +1,13 @@
 <div class="no-padding no-message  message no-margin-bottom">
   <button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius" ng-if="messages.length === 0 ">
     <i class="icon ion-ios7-chatbubble-outline"></i>
-    Send {{ tripMatchUser.first_name || tripMatchUser.firstName }} a Message
+    {{ 'SEND' | translate }} {{ tripMatchUser.first_name || tripMatchUser.firstName }} {{ 'A_MESSAGE' | translate }}
   </button>
 
   <button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius"
      ng-if="messages.length > 0">
     <i class="icon ion-ios7-chatboxes-outline"></i>
-    View Messages with {{ tripMatchUser.first_name || tripMatchUser.firstName }}
+    {{ 'VIEW_MESSAGES_WITH' | translate }} {{ tripMatchUser.first_name || tripMatchUser.firstName }}
     <span ng-class="{'badge-positive': numMessagesUnread > 0,
                      'badge': numMessagesUnread > 0}">
       {{ numMessagesUnread > 0 ? numMessagesUnread : "" }}

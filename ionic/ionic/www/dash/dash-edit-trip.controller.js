@@ -1,15 +1,21 @@
 var ctrlModule = angular.module('pooler.controllers');
 ctrlModule
   .controller('DashTripCtrl', ['$scope', 'uberAuthService', 'userService', '$state', 'GoogleMapApi'.ns(), '$ionicModal',
-    '$ionicPopup',
-      function ($scope, uberAuthService, userService, $state, GoogleMapApi, $ionicModal, $ionicPopup) {
+    '$ionicPopup', '$translate',
+      function ($scope, uberAuthService, userService, $state, GoogleMapApi, $ionicModal, $ionicPopup, $translate) {
         var tripIndex = $state.params.tripIndex,
           isNewTrip = tripIndex === null,
-          existingUserTrip;
+          existingUserTrip,
+          langKey = $translate.use();
 
         $scope.isNewTrip = isNewTrip;
 
-        $scope.availableDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        if (langKey === 'zh'){
+          $scope.availableDays = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+        } else if (langKey === 'en'){
+          $scope.availableDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        }
+
 
         if (isNewTrip){
           $scope.trip = {

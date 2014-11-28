@@ -4,8 +4,7 @@
     <div class="trip-modal list card">
       <div class="item item-divider item-royal">
         <i class="icon ion-close-circled modal-close trip-match-request" ng-click="closeTripMatchRequestModal()"></i>
-
-        Join {{ matchMarker.userFirstName }}'s Trip
+        {{ 'JOIN_RIDE' | translate }}
       </div>
       <div class="row">
         <div class="">
@@ -23,19 +22,20 @@
         <span class="item button trip-select no-margin no-border background-transparent">
           <ul class="text-left trip-match-request-info">
 
-            <li><b>Depart:</b>
+            <li><b>{{ 'DEPART' | translate }}:</b>
               {{ matchMarker.tripInfo.departureAddress | formatStreetAddress | displayStreet }}
             </li>
-            <li><b>Arrive:</b>
+            <li><b>{{ 'ARRIVE' | translate }}:</b>
               {{ matchMarker.tripInfo.arrivalAddress | formatStreetAddress | displayStreet }}
             </li>
-            <li><b>Time:</b> {{ matchMarker.tripInfo.departureTime| formatTime }}</li>
-            <li><b>Buffer:</b> +/-{{ matchMarker.tripInfo.bufferWindow }} min.</li>
+            <li><b>{{ 'TIME' | translate }}:</b> {{ matchMarker.tripInfo.departureTime| formatTime }}</li>
+            <li><b>{{ 'BUFFER' | translate }}:</b> +/-{{ matchMarker.tripInfo.bufferWindow }} {{ 'MIN' | translate }}</li>
             <li ng-if="matchMarker.tripInfo.recurring">
+              <!--TODO: translate-->
               <b>{{ matchMarker.tripInfo.days | pluralizeDay }}</b>: {{ matchMarker.tripInfo.days | showTripDays }}
             </li>
             <li ng-if="!matchMarker.tripInfo.recurring">
-              <b>Date</b>: {{  matchMarker.tripInfo.date | formatDateOnetimeTrip }}
+              <b>{{ 'DATE' | translate }}</b>: {{  matchMarker.tripInfo.date | formatDateOnetimeTrip }}
             </li>
           </ul>
         </span>
@@ -44,13 +44,13 @@
       </div>
 
       <p class="text-center light-font no-margin-bottom">
-        Choose a meetup time within {{ matchMarker.userFirstName }}'s buffer window
+        {{ 'CHOOSE_MEETUP_TIME' | translate }} {{ matchMarker.userFirstName }}'s {{ 'BUFFER_WINDOW' | translate }}
       </p>
 
       <div class="row no-padding-top no-padding-bottom">
         <div class="col col-offset-20 no-padding-top no-padding-bottom">
           <label class="item item-input input-height-fix no-border no-padding-top" >
-            <span class="input-label text-color-black meetup-label">Meetup Time:</span>
+            <span class="input-label text-color-black meetup-label">{{ 'MEETUP_TIME' | translate }}:</span>
             <input type="time" class="margin-top-8-percent meetup-time-request" ng-model="matchMarker.tripInfo.requestInfo.departureTime">
           </label>
         </div>
@@ -60,12 +60,12 @@
         <div class="margin-auto no-margin-top row">
           <button class="button button-light text-center meetup-request button-small col"
                   ng-click="closeTripMatchRequestModal()">
-            Cancel
+            {{ 'CANCEL' | translate }}
           </button>
           <button class="text-center button button-energized meetup-request button-small col"
                   ng-click="requestTrip(matchMarker.tripInfo.tripInfo, matchMarker.user, matchMarker.tripInfo.requestInfo)">
             <i class="icon ion-ios7-paperplane placeholder-icon"></i>
-            Send Trip Request
+            {{ 'SEND_TRIP_REQUEST' | translate }}
           </button>
         </div>
       </div>

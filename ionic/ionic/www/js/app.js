@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns(), 'LocalStorageModule',
-    'ion-google-place', 'angularMoment', 'ngCordova'])
+    'ion-google-place', 'angularMoment', 'ngCordova', 'pascalprecht.translate'])
 
 .constant('API_HOST', 'https://liampronan.com/api')
 

@@ -1,7 +1,7 @@
 var ctrlModule = angular.module('pooler.controllers');
   ctrlModule
-    .controller('DashCtrl', ['$scope', 'uberAuthService', 'userService', '$state', '$ionicPopup', 'nearbyService',
-      function($scope, uberAuthService, userService, $state, $ionicPopup, nearbyService) {
+    .controller('DashCtrl', ['$scope', 'uberAuthService', 'userService', '$state', '$ionicPopup', 'nearbyService', '$translate', '$timeout',
+      function($scope, uberAuthService, userService, $state, $ionicPopup, nearbyService, $translate, $timeout) {
         userService.setUser().then(function(user){
           $scope.user = user;
           if ($scope.user.uberid){
@@ -23,6 +23,17 @@ var ctrlModule = angular.module('pooler.controllers');
           $scope.trip = $scope.trips[$scope.tripIndex];
         }
 
+        $scope.setLanguage = function(langKey){
+          $translate.use(langKey);
+          $scope.selectedLangKey = $translate.use();
+          if (langKey === 'zh'){
+            moment.locale('zh-cn');
+          } else if (langKey === 'en'){
+            moment.locale('en');
+          }
+        }
+
+        $scope.selectedLangKey = $translate.use();
         // confirm dialog
         $scope.showDeleteConfirm = function(trip) {
           var confirmPopup = $ionicPopup.confirm({

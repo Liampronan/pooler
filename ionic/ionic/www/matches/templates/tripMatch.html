@@ -14,15 +14,15 @@
         <span class="item button trip-select  no-margin no-border background-transparent">
           <ul class="text-left matches-trip-match">
 
-            <li><b>Depart:</b> {{ tripMatchUserTrip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}</li>
-            <li><b>Arrive:</b> {{ tripMatchUserTrip.arrivalLocation.formattedAddress | formatStreetAddress  }}</li>
-            <li><b>Time:</b> {{ tripMatchUserTrip.departureTime| formatTime }}</li>
-            <li><b>Buffer:</b> +/- {{ tripMatchUserTrip.bufferWindow }} min</li>
+            <li><b>{{ 'DEPART' | translate }}:</b> {{ tripMatchUserTrip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}</li>
+            <li><b>{{ 'ARRIVE' | translate }}:</b> {{ tripMatchUserTrip.arrivalLocation.formattedAddress | formatStreetAddress  }}</li>
+            <li><b>{{ 'TIME' | translate }}:</b> {{ tripMatchUserTrip.departureTime| formatTime }}</li>
+            <li><b>{{ 'BUFFER' | translate }}:</b> +/- {{ tripMatchUserTrip.bufferWindow }} {{ 'MIN' | translate }}</li>
             <li ng-if="trip.recurring">
               <b>{{ tripMatchUserTrip.days | pluralizeDay }}</b>: {{ tripMatchUserTrip.days | showTripDays }}
             </li>
             <li ng-if="!trip.recurring">
-              <b>Date</b>: {{ tripMatchUserTrip.date | formatDateOnetimeTrip }}
+              <b>{{ 'DATE' | translate }}</b>: {{ tripMatchUserTrip.date | formatDateOnetimeTrip }}
             </li>
           </ul>
         </span>
@@ -33,7 +33,7 @@
 
   <div>
     <p class="text-center light-font" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip">
-      To request a trip, choose a meetup point and time
+      {{ 'TO_REQUEST_PICK_INFO' | translate }}
     </p>
 
 
@@ -41,7 +41,7 @@
       <div class="margin-auto">
         <button class="text-center button button-small meetup-point" ng-click="showSelectMeetupPointModal()">
           <i class="icon ion-pin placeholder-icon"></i>
-          {{ markers[2].setByUser ? "Change" : "Select" }} Meetup Point
+          {{ markers[2].setByUser ? ("CHANGE" | translate) : ("SELECT" | translate) }} {{ 'MEETUP_POINT' | translate }}
         </button>
       </div>
     </div>
@@ -54,7 +54,7 @@
     <div class="col col-offset-20 no-padding-top">
       <p ng-if="markers[2].setByUser || tripMatch.userTrip.isMatchTrip || tripMatch.requestInfo.isMatchTrip"
          class="meet-at trip-match-color no-margin-bottom trip-info-text">
-        <b>Meet at:</b>
+        <b>{{ 'MEET_AT' | translate }}:</b>
         {{ (markers[2].meetupPoint.formatted_address || tripMatch.requestInfo.departureAddress)
         | formatStreetAddress | displayStreet
         }}
@@ -64,7 +64,7 @@
   <div class="row">
     <div class="col col-offset-20 no-padding-top">
       <label class="item item-input input-height-fix no-border no-padding-top background-transparent" >
-        <span class="input-label trip-match-color meetup-label">Meetup Time:</span>
+        <span class="input-label trip-match-color meetup-label">{{ 'MEETUP_TIME' | translate }}:</span>
         <input type="time" class="meetup-time trip-info-text" ng-model="tripMatch.requestInfo.departureTime">
       </label>
     </div>
@@ -77,7 +77,7 @@
       <button class="text-center button button-energized meetup-request"
         ng-disabled="!trip.request.departureTime || !markers[2].setByUser">
         <i class="icon ion-ios7-paperplane placeholder-icon"></i>
-        Send Trip Request
+        {{ 'SEND_TRIP_REQUEST' | translate }}
       </button>
     </div>
   </div>
@@ -86,7 +86,7 @@
     <div class="margin-auto">
       <button class="text-center button button-energized meetup-request disabled">
         <i class="icon ion-android-checkmark placeholder-icon"></i>
-        Trip Request Pending
+        {{ 'TRIP_REQUEST_PENDING' | translate }}
       </button>
     </div>
   </div>
@@ -96,7 +96,7 @@
     <div class="margin-auto">
       <button class="text-center button button-energized meetup-request" ng-click="acceptRequest()">
         <i class="icon ion-android-checkmark placeholder-icon"></i>
-        Accept Request
+        {{ 'ACCEPT_REQUEST' | translate }}
       </button>
     </div>
   </div>
@@ -108,7 +108,7 @@
       <button class="text-center button button-balanced meetup-request button-clear icon-left  ion-android-checkmark"
               ng-click="acceptRequest()">
         <!--<i class="icon placeholder-icon"></i>-->
-        Accepted
+        {{ 'ACCEPTED' | translate }}
       </button>
     </div>
   </div>

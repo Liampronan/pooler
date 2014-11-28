@@ -264,8 +264,15 @@ input.my-trip{
     right: 50%;
 }
 
-.matches-text{
+.en .matches-text{
     margin-left: 10%;
+}
+.zh .matches-text{
+    margin-left: 2%;
+}
+
+.zh i:before {
+    right: 15px !important;
 }
 
 .margin-auto{

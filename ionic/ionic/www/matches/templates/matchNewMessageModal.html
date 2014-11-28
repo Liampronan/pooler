@@ -4,7 +4,7 @@
       <!--TODO: subject needed? multiple subjects?-->
       <div class="item item-divider match text-center item-royal">
         <i class="icon ion-close-circled modal-close" ng-click="closeMatchNewMessageModal()"></i>
-        Messages with {{ tripMatchUser.first_name || tripMatchUser.firstName }}
+        {{ 'MESSAGES_WITH' | translate }} {{ tripMatchUser.first_name || tripMatchUser.firstName }}
       </div>
       <div class="yo">
         <div ng-repeat="message in messages" >
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="row background-stable">
-        <span class="underline black-text match-message-reply"><b>Message:</b></span>
+        <span class="underline black-text match-message-reply"><b>{{ 'MESSAGE' | translate }}:</b></span>
         <!--TODO: fix ng-model here.. sharing scopes b/w directives-->
         <textarea ng-model="$parent.$parent.$parent.message" class="match message-reply item-text-wrap background-stable">
 
@@ -35,7 +35,7 @@
         <div class="col-50">
           <button class="button no-margin icon-right ion-close-round button-stable button-full border-transparent"
                   ng-click="closeMatchNewMessageModal()">
-            Cancel
+            {{ 'CANCEL' | translate }}
           </button>
         </div>
         <div class="col-50">
@@ -43,7 +43,7 @@
 
           <button class="button no-margin icon-right ion-android-mail button-energized button-full border-transparent" ng-click="sendMessage()"
                   ng-disabled="!$parent.$parent.$parent.message">
-            Send
+            {{ 'SEND' | translate }}
           </button>
         </div>
       </div>

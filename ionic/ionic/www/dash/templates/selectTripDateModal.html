@@ -3,19 +3,19 @@
 
     <div class="item item-divider item-royal">
       <span class="modal-title">
-        Trip Date
+        {{ 'TRIP_DATE' | translate }}
       </span>
       <i class="icon ion-close-circled modal-close" ng-click="closeSelectTripDateModal()"></i>
     </div>
 
     <label class="item item-input">
-      <span class="input-label">Date</span>
+      <span class="input-label">{{ 'DATE' | translate }}</span>
       <input type="date" ng-model="trip.date">
     </label>
 
     <button class="button button-full button-royal no-margin"
             ng-click="closeSelectTripDateModal()">
-      Done
+      {{'DONE' | translate}}
     </button>
 
   </ion-list>

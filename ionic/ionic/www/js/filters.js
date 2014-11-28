@@ -1,10 +1,20 @@
 var app = angular.module('pooler');
 
-app.filter('showTripDays', function () {
-  var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+app.filter('showTripDays', function ($translate) {
+
   return function (tripDays) {
 
-    var output = "";
+    var days,
+      langKey = $translate.use(),
+      output = "";
+
+    console.log(langKey);
+    if (langKey === 'en'){
+      days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    } else if (langKey === 'zh'){
+      days = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+    }
+
     tripDays.forEach(function (value, index, arr) {
       //return full day if it's only day for trip
       if (arr.reduce(sumDays) === 1){
@@ -23,9 +33,9 @@ app.filter('showTripDays', function () {
           output += ", ";
         }
         if (index == 1 || index == 3 || index == 5 || index == 6) {
-          output += days[index].slice(0, 2) + "."; //Tu, Th, Sa, Su
+          output += days[index].slice(0, 2); //Tu, Th, Sa, Su
         } else {
-          output += days[index][0] + "."; //M, W, F
+          output += days[index][0]; //M, W, F
         }
       }
     })
@@ -34,8 +44,12 @@ app.filter('showTripDays', function () {
 
 });
 
-app.filter('formatDateOnetimeTrip', function () {
+app.filter('formatDateOnetimeTrip', function ($translate) {
+
+
   return function(date){
+    var langKey = $translate.use();
+
     var unformattedDate = moment(date);
     return unformattedDate.format("dddd, MM/D");
   }

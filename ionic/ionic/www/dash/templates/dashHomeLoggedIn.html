@@ -9,7 +9,8 @@
           <h4 class="text-center small-margin-top">{{ user.firstName }}</h4>
         </div>
         <div class="col">
-          <h3 class="dash-header"><b>My Trips</b></h3>
+          <h3 class="dash-header"><b>{{ 'MYTRIPS' | translate }}</b></h3>
+
         </div>
       </div>
     </div>
@@ -18,19 +19,19 @@
 
     <my-trip ng-if="trips && trips.length > 0"></my-trip>
 
-    <div class="row small-margin-bottom my-trip-next-prev-buttons" ng-if="trips && trips.length > 1">
+    <div class="row no-margin-bottom my-trip-next-prev-buttons" ng-if="trips && trips.length > 1">
       <div class="col-10"></div>
       <div class="col">
         <button class="button icon-left button-icon  button-outline button-dark button-small ion-chevron-left"
                 ng-click="prevTrip()" ng-show="trips.length > 1 && $scope.tripIndex > 0">
-          Prev
+          {{ 'PREV' | translate }}
         </button>
       </div>
       <div class="col"></div>
       <div class="col col-25">
         <button class="button icon-right button-icon button-outline button-small button-lighter-slate ion-chevron-right"
                 ng-show="trips.length > 1" ng-click="nextTrip()">
-          Next
+          {{ 'NEXT' | translate }}
         </button>
       </div>
       <!--<div class="col-10"></div>-->
@@ -39,9 +40,20 @@
     <div class="text-center" ng-if="trips && trips.length > 0">
       <a ui-sref="tab.dash-edit-trip">
         <button class="button button-calm button-small larger-text-with-padding icon-left ion-plus-round ">
-          Add a Trip
+          {{ 'ADD_A_TRIP' | translate }}
         </button>
       </a>
+    </div>
+
+    <div class="text-center" style="width: 50%; margin: auto; margin-top: 5px">
+      <div class="button-bar">
+        <a class="button button-small" ng-class="{'active': selectedLangKey === 'en'}" ng-click="setLanguage('en')">
+          English
+        </a>
+        <a class="button button-small" ng-click="setLanguage('zh')" ng-class="{'active': selectedLangKey === 'zh'}">
+          汉语
+        </a>
+      </div>
     </div>
 
 

@@ -2,14 +2,14 @@
   <ion-content class="padding">
     <div class="home-section no-top-padding">
       <div class="text-center">
-        <h3 class="text-center new-trip"><b>{{ isNewTrip ? "New Trip" : "Edit Trip" }}</b></h3>
-        <p class="new-trip"><b>Set up a trip to find rides</b></p>
+        <h3 class="text-center new-trip"><b>{{ isNewTrip ? ('NEW_TRIP' | translate) : ("EDIT_TRIP" | translate) }}</b></h3>
+        <p class="new-trip"><b>{{'SET_UP_TRIP' | translate}}</b></p>
         <div class="list card trip-select">
           <div class="row">
             <div class="col">
               <label class="item item-input item-stacked-label trip">
 
-              <ion-google-place placeholder="{{ (trip.departureLocation.formattedAddress | formatStreetAddress) || 'Departure Location' }}"
+              <ion-google-place placeholder="{{ (trip.departureLocation.formattedAddress | formatStreetAddress) || ('DEPARTURE_LOCATION' | translate) }}"
                                 ng-model="trip.departureLocation" value="departureLocation"/>
               </label>
             </div>
@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col">
               <label class="item item-input trip">
-                <ion-google-place placeholder="{{ (trip.arrivalLocation.formattedAddress | formatStreetAddress) || 'Arrival Location' }}" ng-model="trip.arrivalLocation"
+                <ion-google-place placeholder="{{ (trip.arrivalLocation.formattedAddress | formatStreetAddress) || ('ARRIVAL_LOCATION' | translate) }}" ng-model="trip.arrivalLocation"
                                   value="arrivalLocation"/>
               </label>
             </div>
@@ -27,7 +27,7 @@
           <div class="row">
             <div class="col">
               <label class="item item-input input-height-fix">
-                <span class="input-label trip">Departure Time</span>
+                <span class="input-label trip">{{'DEPARTURE_TIME' | translate}}</span>
                 <input type="time" class="text-center" ng-model="trip.departureTime">
               </label>
             </div>
@@ -37,7 +37,7 @@
             <div class="col">
               <label class="item item-input input-height-fix">
                 <span  class="input-label trip" >
-                  Buffer Window (+/- min.)
+                  {{ 'BUFFER_WINDOW_LONG' | translate }}
                 </span>
                 <input type="number" class="trip-buffer-window" ng-model="trip.bufferWindow">
               </label>
@@ -48,48 +48,50 @@
           <div class="row text-center">
             <button class="button col-offset-30 col button-small" ng-class="{ 'button-royal': !trip.recurring, 'button-stable': trip.recurring }"
                     ng-click="switchTripType(false)">
-              One-time
+              {{ 'ONE_TIME' | translate }}
             </button>
             <button class="button direction button-small col" ng-class="{ 'button-royal': trip.recurring, 'button-stable': !trip.recurring }"
                     ng-click="switchTripType(true)">
-              Recurring
+              {{ 'RECURRING' | translate }}
             </button>
           </div>
 
           <div class="row" ng-if="trip.recurring">
             <div class="col no-border">
-              <b>Days:</b>
+              <b>{{ 'DAYS' | translate }}:</b>
               <span>
+                <!--TODO: translate-->
                 {{tripDaySelected() ? (trip.days | showTripDays) : "None selected"}}
               </span>
               <br/>
               <button class="button button-small button-royal" ng-click="showSelectTripDaysModal()">
-                {{ tripDaySelected() ? 'Change' : 'Select' }} Trip Days
+                {{ tripDaySelected() ? 'Change' : 'Select' }} {{'TRIP_DAYS' | translate}}
               </button>
             </div>
           </div>
 
           <div class="row" ng-if="!trip.recurring">
             <div class="col no-border">
-              <b>Date:</b>
-              <span >
+              <b>{{ 'DATE' | translate }}:</b>
+              <span>
+                <!--TODO: translate-->
                 {{ trip.date | formatDateOnetimeTrip }}
               </span>
               <br/>
               <button class="button button-small button-royal" ng-click="showSelectTripDateModal()">
-                Change Trip Date
+                {{'CHANGE_TRIP_DATE' | translate}}
               </button>
             </div>
           </div>
           <!--TODO: ng-validate instead of fn()-->
           <button class="button button-small button-energized add-trip" ng-disabled="!isReadyToSubmit()"
                   ng-click="createTrip()" ng-if="isNewTrip">
-            Create Trip
+            {{'CREATE_TRIP' | translate}}
           </button>
 
           <button class="button button-small button-energized add-trip" ng-disabled="!isReadyToSubmit()"
                   ng-click="updateTrip()" ng-if="!isNewTrip">
-            Update Trip
+            {{'UPDATE_TRIP' | translate}}
           </button>
           <!--<button class="button button-small button-energized" ng-class="{disabled: !isReadyToSubmit()}"-->
                   <!--ng-click="setupRoundTrip()" ng-hide="isRoundTrip || !isNewTrip">-->

@@ -2,28 +2,29 @@
   <ion-list>
 
     <div class="item item-divider item-royal">
-      Select Trip
+      {{ 'SELECT_TRIP' | translate }}
       <i class="icon ion-close-circled modal-close" ng-click="closeSelectTripModal()"></i>
     </div>
 
     <a class="item button button-stable button-full trip-select no-margin"  ng-repeat="trip in trips"
       ng-click="setTrip($index)">
       <ul>
-        <li><b>Depart:</b> {{ trip.departureLocation.formattedAddress | formatStreetAddress }}</li>
-        <li><b>Arrive:</b> {{ trip.arrivalLocation.formattedAddress | formatStreetAddress }}</li>
-        <li><b>Time:</b> {{ trip.departureTime| formatTime }}</li>
+        <li><b>{{ 'DEPART' | translate }}:</b> {{ trip.departureLocation.formattedAddress | formatStreetAddress }}</li>
+        <li><b>{{ 'ARRIVE' | translate }}:</b> {{ trip.arrivalLocation.formattedAddress | formatStreetAddress }}</li>
+        <li><b>{{ 'TIME' | translate }}:</b> {{ trip.departureTime| formatTime }}</li>
         <li ng-if="trip.recurring">
+          <!--TODO: translate-->
           <b>{{ trip.days | pluralizeDay }}</b>: {{ trip.days | showTripDays }}
         </li>
         <li ng-if="!trip.recurring">
-          <b>Date</b>: {{ trip.date | formatDateOnetimeTrip }}
+          <b>{{ 'DATE' | translate }}</b>: {{ trip.date | formatDateOnetimeTrip }}
         </li>
       </ul>
     </a>
 
     <button class="button button-light icon ion-plus-round button-full no-margin item trip-selector-add-trip" ui-sref="tab.dash-edit-trip"
             ng-click="closePickTripModal()">
-      Add New Trip
+      {{ 'ADD_NEW_TRIP' | translate }}
     </button>
 
   </ion-list>

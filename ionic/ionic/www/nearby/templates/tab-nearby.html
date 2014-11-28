@@ -25,12 +25,12 @@
                         (marker.tripInfo.date | formatDateOnetimeTrip )
                     }}
                     <br/>
-                    <b>Depart:</b> {{ marker.tripInfo.departureTime | formatTime }}
+                    <b>{{ 'DEPART' | translate }}:</b> {{ marker.tripInfo.departureTime | formatTime }}
                     <br/>
-                    <b>Buffer:</b> +/-{{ marker.tripInfo.bufferWindow }} min.
+                    <b>{{ 'BUFFER' | translate }}:</b> +/-{{ marker.tripInfo.bufferWindow }} {{ 'MIN' | translate }}
                     <br/>
                     <div class="destination-info">
-                      <b>Destination:</b> {{ marker.tripInfo.arrivalAddress | formatStreetAddress | displayStreet }}
+                      <b>{{ 'DESTINATION' | translate }}:</b> {{ marker.tripInfo.arrivalAddress | formatStreetAddress | displayStreet }}
                       </div>
                   </div>
 
@@ -40,7 +40,7 @@
                   <div class="col col-offset-20 no-padding-bottom" style="z-index: 10000000000000000">
                     <button style="z-index: 10000000000000000" class="button button-small no-padding-bottom button-energized icon-left ion-plus-round larger-text-with-padding"
                       ng-click="$parent.showTripMatchRequestModal($parent.marker)">
-                      Join Ride
+                      {{ 'JOIN_RIDE' | translate }}
                     </button>
                   </div>
                 </div>

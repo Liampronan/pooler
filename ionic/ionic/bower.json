@@ -9,9 +9,10 @@
     "ngAutocomplete": "~1.0.0",
     "ion-google-place": "~0.0.1",
     "angular-moment": "~0.8.2",
-    "ngCordova": "~0.1.7-alpha"
+    "ngCordova": "~0.1.7-alpha",
+    "angular-translate": "~2.4.2"
   },
   "resolutions": {
-    "angular": "1.2.26"
+    "angular": "~1.2.17"
   }
 }

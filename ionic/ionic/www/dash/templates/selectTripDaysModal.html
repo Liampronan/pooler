@@ -3,7 +3,7 @@
 
     <div class="item item-divider item-royal">
       <span class="modal-title">
-        Select Days for this Trip
+        {{ 'SELECT_TRIP_DAYS' | translate }}
       </span>
       <i class="icon ion-close-circled modal-close" ng-click="closeSelectTripDaysModal()"></i>
 
@@ -13,12 +13,13 @@
       <label class="checkbox checkbox-royal">
         <input type="checkbox" ng-model="trip.days[$index]">
       </label>
+      <!--TODO: translate-->
       {{day}}
     </li>
 
     <button class="button button-full button-royal no-margin" ng-class="{'disabled': !tripDaySelected()}"
             ng-click="closeSelectTripDaysModal()">
-      Done Selecting
+      {{ 'DONE' | translate }}
     </button>
 
   </ion-list>
