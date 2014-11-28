@@ -17,6 +17,8 @@ var ctrlModule = angular.module('pooler.controllers');
           }
         });
 
+        $translate.use() === 'en' ? moment.locale('en') : moment.locale('zh-cn'); //set initial moment locale
+
 
         $scope.login = uberAuthService.login;
 

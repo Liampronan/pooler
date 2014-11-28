@@ -30,6 +30,38 @@ angular.module('pooler')
           return data['matchesUsers'];
       };
 
+      this.setACMRegid = function(ACMRegid){
+        data['ACMRegid'] = ACMRegid;
+      }
+
+      this.setAPNRegid = function(APNRegid){
+        data['APNRegid'] = APNRegid;
+      }
+
+      this.updatePushInfo = function(){
+          var deferred = $q.defer(),
+              regid = data['ACMRegid'] || data['APNRegid'],
+              device = data['ACMRegid'] ? 'Android' : 'iOS',
+              uberid = data['user']['uberid'],
+              pushInfo = {
+                regid: regid,
+                device: device
+              };
+
+        $http({
+          url: API_HOST + '/users/updatePushInfo',
+          method: "POST",
+          data: {
+            'uberid': uberid,
+            'pushInfo': pushInfo
+          }
+        })
+          .then(function (success) {
+            deferred.resolve(success.data)
+          })
+
+        return deferred.promise
+      }
 
       this.setUser = function (user, bustCache) {
         var storedUser = localStorageService.get('user'),

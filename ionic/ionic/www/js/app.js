@@ -6,11 +6,11 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'google-maps'.ns(), 'LocalStorageModule',
-    'ion-google-place', 'angularMoment', 'ngCordova', 'pascalprecht.translate'])
+    'ion-google-place', 'angularMoment', 'ngCordova', 'pascalprecht.translate', 'push'])
 
 .constant('API_HOST', 'https://liampronan.com/api')
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaPush, $cordovaDevice, pushConfigService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +21,29 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    var platform = $cordovaDevice.getPlatform();
+    console.log('device', platform);
+    //pushplugin
+    if (platform === 'iOS'){
+      console.log('helloo you will get this..');
+      $cordovaPush.register(pushConfigService.iosConfig).then(function(result) {
+        console.log('¡iOS', result);
+        userService.setAPNRegid(result);
+      }, function(err) {
+        console.log(':<', err);
+        // An error occured. Show a message to the user
+      });
+    } else if (platform === 'Android'){
+      $cordovaPush.register(pushConfigService.androidConfig).then(function(result) {
+        console.log('¡', result);
+      }, function(err) {
+        console.log(':<', err);
+        // An error occured. Show a message to the user
+      });
+    }
+
+
   });
 })
 

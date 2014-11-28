@@ -224,6 +224,20 @@ exports.getUser = function(req, res){
   })
 }
 
+exports.updatePushInfo = function(req, res){
+  var uberid = req.body.uberid,
+      pushInfo = req.body.pushInfo;
+
+
+  User.findOneAndUpdate({"uberid": uberid},
+                        {"pushInfo": pushInfo},
+                        function(err, user){
+                            if (err) console.error(err);
+                            return res.json(200, user)
+                        })
+
+}
+
 
 /**
  * Login

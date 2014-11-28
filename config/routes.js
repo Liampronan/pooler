@@ -37,6 +37,7 @@ module.exports = function (app, passport) {
   app.post('/trips/requestTrip', trips.requestTrip);
   app.post('/trips/acceptRequest', trips.acceptRequest);
   app.post('/messages/create', messages.create);
+  app.post('/users/updatePushInfo', users.updatePushInfo);
   app.get('/messages/', messages.index);
   app.get('/login', users.login);
   app.get('/signup', users.signup);

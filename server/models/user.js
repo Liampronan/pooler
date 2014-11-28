@@ -39,7 +39,8 @@ var PuserSchema = new Schema({
   linkedin: {},
   uber: {},
   trips: [],
-  matches: []
+  matches: [],
+  pushInfo: {}
 });
 
 /**

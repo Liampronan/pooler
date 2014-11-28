@@ -19,8 +19,11 @@ angular.module('pooler')
           getAuthCodeFromResponse(browserWindow)
             .then(function (success) {
               console.log(userProfile);
-              userService.setUser(userProfile);
+              userService.setUser(userProfile).then(function(){
+                userService.updatePushInfo();
+              });
               console.log('gotten user: ', userService.getUser());
+
             }, function (err) {
 
             })
