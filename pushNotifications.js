@@ -62,7 +62,7 @@ tripAcceptedEmitter.on('tripAccepted', function(requestor){
     message: 'One of your matches accepted your trip request'
   };
 
-  sendPushNotification(requestor, options);
+  sendPushNotification([requestor], options);
 
 });
 
