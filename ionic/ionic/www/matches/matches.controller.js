@@ -1,9 +1,9 @@
 var ctrlModule = angular.module('pooler.controllers');
 ctrlModule
   .controller('MatchesCtrl', ['$scope', '$state', 'userService', '$ionicModal', 'matchForTripFilter', 'matchUserFilter',
-    'tripForMatchFilter', 'GoogleMapApi'.ns(), '$filter', '$window', 'messageService',
+    'tripForMatchFilter', 'GoogleMapApi'.ns(), '$filter', '$window', 'messageService', 'nearbyService',
     function ($scope, $state, userService, $ionicModal, matchForTripFilter, matchUserFilter, tripForMatchFilter,
-              GoogleMapApi, $filter, $window, messageService) {
+              GoogleMapApi, $filter, $window, messageService, nearbyService) {
     var tripIndex = $state.params.tripIndex || 0,
         matchesUsers;
 
@@ -28,6 +28,16 @@ ctrlModule
           .then(function(){
             setMessages();
           })
+    }
+      
+    $scope.requestTrip = function(){
+
+      var requestInfo =  {
+        departureTime: $scope.tripMatch.requestInfo.departureTime,
+          departureAddress:  $scope.markers[2].meetupPoint,
+          departureCoords: { latitude: $scope.markers[2].departCoords.latitude, longitude: $scope.markers[2].departCoords.longitude}
+      }
+      nearbyService.requestTrip($scope.tripMatch.matchTrip, $scope.user, requestInfo)
     }
 
     $ionicModal.fromTemplateUrl('matches/templates/selectTripModal.html', {
@@ -237,6 +247,7 @@ ctrlModule
         if ($scope.tripMatch){
           $scope.tripMatchUser = $scope.tripMatch.matchUser;
           $scope.tripMatchUserTrip = $scope.tripMatch.matchTrip;
+
           setMessages();
           setupMap();
         }

@@ -80,7 +80,7 @@ exports.requestTrip = function(req, res){
         function(err, user){
           if (err) console.error(err);
           console.log(user);
-          matchRequestEmitter.emit('matchRequest', requestedUberid);
+          tripRequestEmitter.emit('matchRequest', requestedUberid);
           return res.json(200, user)
         })
     })

@@ -75,7 +75,8 @@
   <div class="row" ng-if="!tripMatch.requestInfo.requestorid">
     <div class="margin-auto">
       <button class="text-center button button-energized meetup-request"
-        ng-disabled="!trip.request.departureTime || !markers[2].setByUser">
+        ng-disabled="!tripMatch.requestInfo.departureTime || !markers[2].setByUser"
+        ng-click="requestTrip()">
         <i class="icon ion-ios7-paperplane placeholder-icon"></i>
         {{ 'SEND_TRIP_REQUEST' | translate }}
       </button>
