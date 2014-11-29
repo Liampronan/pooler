@@ -55,7 +55,7 @@
       <p ng-if="markers[2].setByUser || tripMatch.userTrip.isMatchTrip || tripMatch.requestInfo.isMatchTrip"
          class="meet-at trip-match-color no-margin-bottom trip-info-text">
         <b>{{ 'MEET_AT' | translate }}:</b>
-        {{ (markers[2].meetupPoint.formatted_address || tripMatch.requestInfo.departureAddress)
+        {{ (markers[2].meetupPoint.formatted_address || tripMatch.requestInfo.departureAddress.formatted_address)
         | formatStreetAddress | displayStreet
         }}
       </p>
@@ -76,7 +76,7 @@
     <div class="margin-auto">
       <button class="text-center button button-energized meetup-request"
         ng-disabled="!tripMatch.requestInfo.departureTime || !markers[2].setByUser"
-        ng-click="requestTrip()">
+        ng-click="requestTrip() ">
         <i class="icon ion-ios7-paperplane placeholder-icon"></i>
         {{ 'SEND_TRIP_REQUEST' | translate }}
       </button>

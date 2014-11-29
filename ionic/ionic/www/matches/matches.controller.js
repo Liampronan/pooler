@@ -5,8 +5,8 @@ ctrlModule
     function ($scope, $state, userService, $ionicModal, matchForTripFilter, matchUserFilter, tripForMatchFilter,
               GoogleMapApi, $filter, $window, messageService, nearbyService) {
     var tripIndex = $state.params.tripIndex || 0,
-        matchesUsers;
-
+        matchesUsers,
+        mapid = 0;
 
     //setUser(user, bustCache)
     userService.setUser(false, true).then(function(user){
@@ -37,7 +37,9 @@ ctrlModule
           departureAddress:  $scope.markers[2].meetupPoint,
           departureCoords: { latitude: $scope.markers[2].departCoords.latitude, longitude: $scope.markers[2].departCoords.longitude}
       }
-      nearbyService.requestTrip($scope.tripMatch.matchTrip, $scope.user, requestInfo)
+      nearbyService.requestTrip($scope.tripMatch.matchTrip, $scope.tripMatchUser, requestInfo).then(function(){
+        $scope.tripMatch.requestInfo.requestorid = $scope.user.uberid;
+      })
     }
 
     $ionicModal.fromTemplateUrl('matches/templates/selectTripModal.html', {
@@ -93,9 +95,14 @@ ctrlModule
             $scope.selectMeetupPointModal.show();
           };
 
-          $scope.closeSelectMeetupPointModall = function() {
+          $scope.closeSelectMeetupPointModal = function() {
             $scope.selectMeetupPointModal.hide();
+//            $scope.selectMeetupPointModal.remove();
           };
+
+          $scope.$on('$destroy', function () {
+            $scope.selectMeetupPointModal.remove();
+          });
 
 //        $scope.$watch('trip', function (newVal, oldVal) {
 //          $scope.closeSelectMeetupPointModal();
@@ -125,76 +132,8 @@ ctrlModule
             setPolyline();
             $scope.showPolyline = true;
           }
-          var matchTripsMidpoint = $window.google.maps.geometry.spherical.interpolate(
-              new google.maps.LatLng(
-                $scope.trip.departureLocation.latitude,
-                $scope.trip.departureLocation.longitude
-              ),
-              new google.maps.LatLng(
-                $scope.tripMatchUserTrip.departureLocation.latitude,
-                $scope.tripMatchUserTrip.departureLocation.longitude
-              ),
-              0.5);
 
-          $scope.markers = [
-            {
-              idKey: 1,
-              departCoords: {
-                latitude: $scope.trip.departureLocation.latitude,
-                longitude: $scope.trip.departureLocation.longitude
-              },
-              arrivalCoords: {
-                latitude: $scope.trip.arrivalLocation.latitude,
-                longitude: $scope.trip.arrivalLocation.longitude
-              },
-              windowOpts: {
-                visible: false
-              },
-              options: {
-                opacity: .7
-              },
-              trip: $scope.trip,
-              userPicture: $scope.user.profilePicture,
-              firstName: $scope.user.firstName
-            },
-            {
-              idKey: 2,
-              departCoords: {
-                latitude: $scope.tripMatchUserTrip.departureLocation.latitude,
-                longitude: $scope.tripMatchUserTrip.departureLocation.longitude
-              },
-              arrivalCoords: {
-                latitude: $scope.tripMatchUserTrip.arrivalLocation.latitude,
-                longitude: $scope.tripMatchUserTrip.arrivalLocation.longitude
-              },
-              windowOpts: {
-                visible: false
-              },
-              options: {
-                opacity: .7
-              },
-              trip: $scope.tripMatchUserTrip,
-              userPicture: $scope.tripMatchUser.picture,
-              firstName: $scope.tripMatchUser.first_name
-            },
-            {
-              //meetup pt.
-              idKey: 3,
-              departCoords: {
-                latitude: matchTripsMidpoint.k,
-                longitude: matchTripsMidpoint.B
-              },
-              windowOpts: {
-                visible: false
-              },
-              options: {
-                icon: 'http://library.csun.edu/images/google_maps/marker-green.png',
-                draggable: true,
-                zIndex: 9001
-              },
-              setByUser: false //track whether user has set this yet b/c has default coords
-            }
-          ]
+          setMarkers();
 
           $scope.setMeetupPoint = function(){
             var geocoder = new google.maps.Geocoder(),
@@ -225,6 +164,7 @@ ctrlModule
     }
 
       $scope.$on('matches:updated', function(event, data){
+        $scope.user = userService.getUser();
         setTripMatches($scope.user);
       });
 
@@ -247,13 +187,87 @@ ctrlModule
         if ($scope.tripMatch){
           $scope.tripMatchUser = $scope.tripMatch.matchUser;
           $scope.tripMatchUserTrip = $scope.tripMatch.matchTrip;
-
           setMessages();
+          if ($scope.selectMeetupPointModal) $scope.selectMeetupPointModal.remove();
           setupMap();
+          setMarkers();
         }
-        console.log('match u ',  $scope.tripMatchUser);
         $scope.loaded = true;
       };
+    }
+
+    function setMarkers(){
+      $scope.matchTripsMidpoint = $window.google.maps.geometry.spherical.interpolate(
+        new google.maps.LatLng(
+          $scope.trip.departureLocation.latitude,
+          $scope.trip.departureLocation.longitude
+        ),
+        new google.maps.LatLng(
+          $scope.tripMatchUserTrip.departureLocation.latitude,
+          $scope.tripMatchUserTrip.departureLocation.longitude
+        ),
+        0.5);
+
+      $scope.markers = [
+        {
+          idKey: ++mapid,
+          departCoords: {
+            latitude: $scope.trip.departureLocation.latitude,
+            longitude: $scope.trip.departureLocation.longitude
+          },
+          arrivalCoords: {
+            latitude: $scope.trip.arrivalLocation.latitude,
+            longitude: $scope.trip.arrivalLocation.longitude
+          },
+          windowOpts: {
+            visible: false
+          },
+          options: {
+            opacity: .7
+          },
+          trip: $scope.trip,
+          userPicture: $scope.user.profilePicture,
+          firstName: $scope.user.firstName
+        },
+        {
+          idKey: ++mapid,
+          departCoords: {
+            latitude: $scope.tripMatchUserTrip.departureLocation.latitude,
+            longitude: $scope.tripMatchUserTrip.departureLocation.longitude
+          },
+          arrivalCoords: {
+            latitude: $scope.tripMatchUserTrip.arrivalLocation.latitude,
+            longitude: $scope.tripMatchUserTrip.arrivalLocation.longitude
+          },
+          windowOpts: {
+            visible: false
+          },
+          options: {
+            opacity: .7
+          },
+          trip: $scope.tripMatchUserTrip,
+          userPicture: $scope.tripMatchUser.picture,
+          firstName: $scope.tripMatchUser.first_name
+        },
+        {
+          //meetup pt.
+          idKey: ++mapid,
+          departCoords: {
+            latitude: $scope.matchTripsMidpoint.k,
+            longitude: $scope.matchTripsMidpoint.B
+          },
+          windowOpts: {
+            visible: false
+          },
+          options: {
+            icon: 'http://library.csun.edu/images/google_maps/marker-green.png',
+            draggable: true,
+            zIndex: 9001
+          },
+          setByUser: false //track whether user has set this yet b/c has default coords
+        }
+      ]
+      console.log('hai markers', $scope.markers);
     }
 
   }]);

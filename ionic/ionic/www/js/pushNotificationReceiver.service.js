@@ -19,6 +19,20 @@ angular.module('pooler')
         //get convert "0" to false for iOS
         event.foreground = event.foreground === '0' ? false : event.foreground;
 
+        if (androidOriOSMatch(event)){
+          userService.setUser(false, true).then(function(){
+            $rootScope.$broadcast('matches:updated');
+          })
+        } else if (androidOriOSTripRequest(event)){
+          userService.setUser(false, true).then(function(){
+            $rootScope.$broadcast('matches:updated');
+          })
+        } else if (androidOriOSRequestAccepted(event)){
+          userService.setUser(false, true).then(function(){
+            $rootScope.$broadcast('matches:updated');
+          })
+        }
+
         //show new Match Popup if the app is in foreground (otherwise, don't b/c user already saw notification)
         if (event.foreground && androidOriOSMatch(event)){
           newMatchPopup();
@@ -28,17 +42,13 @@ angular.module('pooler')
           newRequestPopup();
         } else if (!event.foreground && androidOriOSTripRequest(event)){
           $state.go('tab.matches');
+        } else if (event.foreground && androidOriOSRequestAccepted(event)){
+          requestAcceptedPopup();
+        } else if (!event.foreground && androidOriOSRequestAccepted(event)){
+          $state.go('tab.matches');
         }
 
-        if (androidOriOSMatch(event)){
-          userService.setUser(false, true).then(function(){
-              $rootScope.$broadcast('matches:updated');
-          })
-        } else if (androidOriOSTripRequest(event)){
-          userService.setUser(false, true).then(function(){
-            $rootScope.$broadcast('matches:updated');
-          })
-        }
+
       }
 
 //      function androidOriOSNewRider(event){
@@ -102,7 +112,7 @@ angular.module('pooler')
       //alert user of new request
       function newRequestPopup(){
         $ionicPopup.confirm({
-          title: '<b>New Match</b>',
+          title: '<b>New Request</b>',
           template: '<p class="text-center">Another rider requested to join one of your trips</p>',
           buttons: [
             {
@@ -110,7 +120,41 @@ angular.module('pooler')
               type: 'button-default'
             },
             {
-              text: 'View Match',
+              text: 'View Request',
+              type: 'button-energized',
+              onTap: function(e) {
+                // e.preventDefault() will stop the popup from closing when tapped.
+                $state.go('tab.matches');
+              }
+            }
+          ]
+        });
+      }
+
+      function androidOriOSRequestAccepted(event){
+        return androidRequestAccepted(event) || iOSRequestAccepted(event)
+      }
+
+      function androidRequestAccepted(event){
+        return event.payload && event.payload.message.toLowerCase().indexOf('one of your matches accepted your trip request') > -1
+      }
+
+      function iOSRequestAccepted(event){
+        return event.alert && event.alert.toLowerCase().indexOf('one of your matches accepted your trip request') > -1
+      }
+
+      //alert user of new request
+      function requestAcceptedPopup(){
+        $ionicPopup.confirm({
+          title: '<b>Trip Request Accepted</b>',
+          template: '<p class="text-center">Another ride accepted your trip request</p>',
+          buttons: [
+            {
+              text: 'Close',
+              type: 'button-default'
+            },
+            {
+              text: 'View Trip',
               type: 'button-energized',
               onTap: function(e) {
                 // e.preventDefault() will stop the popup from closing when tapped.

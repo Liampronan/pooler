@@ -4,9 +4,11 @@ var Trip  = mongoose.model('Trip');
 var ObjectId = require('mongoose').Types.ObjectId;
 var utils = require('../../lib/utils');
 var EventEmitter = require('events').EventEmitter,
-  tripRequestEmitter;
+  tripRequestEmitter,
+  tripAcceptedEmitter;
 
 exports.tripRequestEmitter = tripRequestEmitter = new EventEmitter();
+exports.tripAcceptedEmitter = tripAcceptedEmitter = new EventEmitter();
 
 
 exports.getNearby = function(req, res){
@@ -90,10 +92,17 @@ exports.requestTrip = function(req, res){
 }
 
 exports.acceptRequest = function(req, res){
-  var matchid = req.body.matchid;
+  var matchid = req.body.matchid,
+      acceptorUberid = req.body.acceptorUberid;
 
   User.update({"matches.id": matchid}, {$set: {"matches.$.requestInfo.accepted": true}}, {multi: true}, function(err, user){
     if (err) console.error(err);
+    User.findOne({$and: [ {"matches.id": matchid}, {uberid: {$ne: acceptorUberid}} ]},
+      function(err, requestor){
+        tripAcceptedEmitter.emit('tripAccepted', requestor);
+      }
+    )
+
     return res.json(200, true)
   })
 }

@@ -3,9 +3,11 @@ var gcm = require('node-gcm'),
     mongoose = require('mongoose'),
     User = mongoose.model('Puser'),
     tripMatchEmitter = require('./server/controllers/users').tripMatchEmitter,
-    matchRequestEmitter = require('./server/controllers/trips').tripRequestEmitter;
+    matchRequestEmitter = require('./server/controllers/trips').tripRequestEmitter,
+    tripAcceptedEmitter = require('./server/controllers/trips').tripAcceptedEmitter;
     tripMatchEmitter.setMaxListeners(0);
     matchRequestEmitter.setMaxListeners(0);
+    tripAcceptedEmitter.setMaxListeners(0);
 
 
 //apple push noticiations
@@ -53,7 +55,16 @@ matchRequestEmitter.on('matchRequest', function(requestedUberid){
 });
 
 
+tripAcceptedEmitter.on('tripAccepted', function(requestor){
 
+  var options = {
+    droidTitle: 'Pooler: Trip Request Accepted',
+    message: 'One of your matches accepted your trip request'
+  };
+
+  sendPushNotification(requestor, options);
+
+});
 
 function sendPushNotification(users, options){
   console.log('sending push to', users);

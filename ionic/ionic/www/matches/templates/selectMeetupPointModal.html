@@ -1,8 +1,14 @@
 <ion-content overflow-scroll="true" class="select-trip-modal">
   <ion-header-bar class="bar-royal">
-    <button class="button button-royal no-border">{{ 'DRAG_TO_MEETUP_LOCATION' | translate }}</button>
+    <button class="button button-royal no-border margin-auto">
+    Select Trip Meetup Point</button>
+    <i class="icon ion-close-circled modal-close" ng-click="closeSelectMeetupPointModal()"></i>
+
 
   </ion-header-bar>
+  <div class="bar bar-subheader">
+    <h4 class="title" style="font-size: 13px">{{ 'DRAG_TO_MEETUP_LOCATION' | translate }}</h4>
+  </div>
   <div id="map_canvas" ng-if="markers.length > 1">
     <ui-gmap-google-map center='map.center' zoom='map.zoom' data-tap-disabled="true">
       <ui-gmap-marker ng-repeat="marker in markers"
@@ -14,7 +20,7 @@
 
         <ui-gmap-window
           show="marker.windowOpts.visible"
-          closeClick="closeWindow(marker.idKey)" data-tap-disabled="true" ng-if="marker.trip">
+          closeClick="closeWindow(marker.idKey)" data-tap-disabled="true" >
           <div class="trip-modal">
             <div class="row">
               <div class="small-margin-top">
