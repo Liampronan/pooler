@@ -70,7 +70,7 @@ angular.module('pooler')
         return deferred.promise
       }
       
-      this.requestTrip = function(requestedTripInfo, requestedUserInfo, requestInfo){
+      this.requestTrip = function(requestedTripInfo, requestedUserInfo, requestInfo, requestorTripInfo){
         var deferred = $q.defer(),
             requestorUserInfo = userService.getUser();
         $http({
@@ -80,7 +80,8 @@ angular.module('pooler')
             'requestorUserInfo': requestorUserInfo,
             'requestedTripInfo': requestedTripInfo,
             'requestedUserInfo': requestedUserInfo,
-            'requestInfo': requestInfo
+            'requestInfo': requestInfo,
+            'requestorTripInfo': requestorTripInfo
           }
         })
           .then(function (success) {

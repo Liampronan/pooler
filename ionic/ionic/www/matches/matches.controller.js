@@ -37,7 +37,7 @@ ctrlModule
           departureAddress:  $scope.markers[2].meetupPoint,
           departureCoords: { latitude: $scope.markers[2].departCoords.latitude, longitude: $scope.markers[2].departCoords.longitude}
       }
-      nearbyService.requestTrip($scope.tripMatch.matchTrip, $scope.tripMatchUser, requestInfo).then(function(){
+      nearbyService.requestTrip($scope.tripMatch.matchTrip, $scope.tripMatchUser, requestInfo, $scope.tripMatch).then(function(){
         $scope.tripMatch.requestInfo.requestorid = $scope.user.uberid;
       })
     }

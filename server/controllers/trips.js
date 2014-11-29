@@ -42,23 +42,11 @@ exports.requestTrip = function(req, res){
       requestorUberid = requestorUserInfo.uberid,
       requestedTripInfo = req.body.requestedTripInfo,
       requestedUserInfo = req.body.requestedUserInfo,
-
+      requestorTripInfo = req.body.requestorTripInfo,
       requestInfo = req.body.requestInfo,
       requestedUberid = requestedUserInfo.uuid,
       matchId = Math.random().toString(36).substr(2, 9),
-      matchForRequestor = {
-        id: matchId,
-        userTrip: requestedTripInfo,
-        matchTrip: requestedTripInfo,
-        matchUser: requestedUserInfo,
-        requestInfo: {
-          requestorid: requestorUberid,
-          accepted: 0,
-          departureTime: requestInfo.departureTime,
-          departureAddress: requestInfo.departureAddress,
-          departureCoords: requestInfo.departureCoords
-        }
-      },
+      matchForRequestor,
       matchForRequested = {
         id: matchId,
         userTrip: requestedTripInfo,
@@ -72,6 +60,37 @@ exports.requestTrip = function(req, res){
           departureCoords: requestInfo.departureCoords
         }
       };
+
+
+  if (requestorTripInfo){
+    matchForRequestor = {
+      id: matchId,
+      userTrip: requestorTripInfo,
+      matchTrip: requestedTripInfo,
+      matchUser: requestedUserInfo,
+      requestInfo: {
+        requestorid: requestorUberid,
+        accepted: 0,
+        departureTime: requestInfo.departureTime,
+        departureAddress: requestInfo.departureAddress,
+        departureCoords: requestInfo.departureCoords
+      }
+    }
+  } else {
+    matchForRequestor = {
+      id: matchId,
+      userTrip: requestedTripInfo,
+      matchTrip: requestedTripInfo,
+      matchUser: requestorUserInfo,
+      requestInfo: {
+        requestorid: requestorUberid,
+        accepted: 0,
+        departureTime: requestInfo.departureTime,
+        departureAddress: requestInfo.departureAddress,
+        departureCoords: requestInfo.departureCoords
+      }
+    }
+  }
 
   console.log('requestedU', requestedUserInfo);
 
