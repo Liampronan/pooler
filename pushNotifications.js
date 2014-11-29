@@ -2,7 +2,11 @@
 var gcm = require('node-gcm'),
     mongoose = require('mongoose'),
     User = mongoose.model('Puser'),
-    tripMatchEmitter = require('./server/controllers/users').tripMatchEmitter;
+    tripMatchEmitter = require('./server/controllers/users').tripMatchEmitter,
+    matchRequestEmitter = require('./server/controllers/trips').tripRequestEmitter;
+    tripMatchEmitter.setMaxListeners(0);
+    matchRequestEmitter.setMaxListeners(0);
+
 
 //apple push noticiations
 //var apn = require('apn'),
@@ -13,25 +17,42 @@ var gcm = require('node-gcm'),
 //  },
 //  apnConnection = new apn.Connection(options);
 
-User.findOne({pushInfo: {$exists: true}}, function(err, user){
-  var options = {
-    droidTitle: 'yooo',
-    message: 'suppp broo'
-  }
-  sendPushNotification([user], options)
-})
+//testing
+//User.findOne({pushInfo: {$exists: true}}, function(err, user){
+//  var options = {
+//    droidTitle: 'yooo',
+//    message: 'suppp broo'
+//  }
+//  sendPushNotification([user], options)
+//})
 
 tripMatchEmitter.on('tripMatch', function(matchUsersUberids){
     User.find({ uberid: { $in: matchUsersUberids } }, function(err, users){
-      if (err) console.error(err)
-      console.log('trip match push users', users);
+      if (err) console.error(err);
+      
       var options = {
         droidTitle: 'Pooler: Trip Match',
         message: 'New match for one of your trips'
-      }
+      };
+
       sendPushNotification(users, options);
     })
-})
+});
+
+matchRequestEmitter.on('matchRequest', function(requestedUberid){
+  User.find({ uberid: requestedUberid }, function(err, user){
+    if (err) console.error(err);
+
+    var options = {
+      droidTitle: 'Pooler: Trip Request',
+      message: 'New trip request for one of your trips'
+    };
+
+    sendPushNotification(user, options);
+  })
+});
+
+
 
 
 function sendPushNotification(users, options){

@@ -3,6 +3,11 @@ var User = mongoose.model('Puser');
 var Trip  = mongoose.model('Trip');
 var ObjectId = require('mongoose').Types.ObjectId;
 var utils = require('../../lib/utils');
+var EventEmitter = require('events').EventEmitter,
+  tripRequestEmitter;
+
+exports.tripRequestEmitter = tripRequestEmitter = new EventEmitter();
+
 
 exports.getNearby = function(req, res){
   var userUberid = req.query.userUberid,
@@ -75,6 +80,7 @@ exports.requestTrip = function(req, res){
         function(err, user){
           if (err) console.error(err);
           console.log(user);
+          matchRequestEmitter.emit('matchRequest', requestedUberid);
           return res.json(200, user)
         })
     })

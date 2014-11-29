@@ -7,24 +7,11 @@ ctrlModule
     var tripIndex = $state.params.tripIndex || 0,
         matchesUsers;
 
+
     //setUser(user, bustCache)
     userService.setUser(false, true).then(function(user){
       userService.retrieveMatchesUsers().then(function(){
-        $scope.user = user;
-        matchesUsers = userService.getMatchesUsers();
-        $scope.setTrip = function(selectedTripIndex) {
-          $scope.trip = $scope.trips[selectedTripIndex];
-          $scope.tripMatch = matchForTripFilter($scope.user, $scope.trip);
-          console.log($scope.tripMatch);
-          if ($scope.tripMatch){
-            $scope.tripMatchUser = $scope.tripMatch.matchUser;
-            $scope.tripMatchUserTrip = $scope.tripMatch.matchTrip;
-            setMessages();
-            setupMap();
-          }
-          console.log('match u ',  $scope.tripMatchUser);
-          $scope.loaded = true;
-        };
+        setTripMatches(user);
         //set initial trip
         $scope.setTrip(tripIndex);
       });
@@ -227,11 +214,35 @@ ctrlModule
         });
     }
 
+      $scope.$on('matches:updated', function(event, data){
+        setTripMatches($scope.user);
+      });
+
     function setMessages(){
       $scope.messages = messageService.getMessagesWith($scope.tripMatchUser.uuid || $scope.tripMatchUser.uberid);
       $scope.message = "";
 //      $scope.numMessagesUnread = numMessagesUnreadFilter($scope.messages, currentUser.linkedInUserId);
       console.log('m', $scope.messages);
+    }
+
+
+
+    function setTripMatches(user){
+      $scope.user = user;
+      matchesUsers = userService.getMatchesUsers();
+      $scope.setTrip = function(selectedTripIndex) {
+        $scope.trip = $scope.trips[selectedTripIndex];
+        $scope.tripMatch = matchForTripFilter($scope.user, $scope.trip);
+        console.log($scope.tripMatch);
+        if ($scope.tripMatch){
+          $scope.tripMatchUser = $scope.tripMatch.matchUser;
+          $scope.tripMatchUserTrip = $scope.tripMatch.matchTrip;
+          setMessages();
+          setupMap();
+        }
+        console.log('match u ',  $scope.tripMatchUser);
+        $scope.loaded = true;
+      };
     }
 
   }]);

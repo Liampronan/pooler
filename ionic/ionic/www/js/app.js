@@ -10,7 +10,7 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
 
 .constant('API_HOST', 'https://liampronan.com/api')
 
-.run(function($ionicPlatform, $cordovaPush, $cordovaDevice, pushConfigService) {
+.run(function($ionicPlatform, $cordovaPush, $cordovaDevice, pushConfigService, pushNotificationReceiverService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
