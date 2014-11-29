@@ -99,14 +99,26 @@ exports.requestTrip = function(req, res){
                         { $addToSet: {matches: matchForRequested} },
     function(err, user){
       if (err) console.error(err);
-      User.findOneAndUpdate({ uberid: requestorUberid },
-                            { $addToSet: {matches: matchForRequestor, trips: requestedTripInfo} },
-        function(err, user){
-          if (err) console.error(err);
-          console.log(user);
-          tripRequestEmitter.emit('matchRequest', requestedUberid);
-          return res.json(200, user)
-        })
+
+      if (requestorTripInfo){ //user already has trip, so no need to add new one
+        User.findOneAndUpdate({ uberid: requestorUberid },
+          { $addToSet: {matches: matchForRequestor} },
+          function(err, user){
+            if (err) console.error(err);
+            console.log(user);
+            tripRequestEmitter.emit('matchRequest', requestedUberid);
+            return res.json(200, user)
+          })
+      } else { //user doesn't have trip (found on nearby tab), so need to add new one
+        User.findOneAndUpdate({ uberid: requestorUberid },
+          { $addToSet: {matches: matchForRequestor, trips: requestedTripInfo} },
+          function(err, user){
+            if (err) console.error(err);
+            console.log(user);
+            tripRequestEmitter.emit('matchRequest', requestedUberid);
+            return res.json(200, user)
+          })
+      }
     })
 }
 
