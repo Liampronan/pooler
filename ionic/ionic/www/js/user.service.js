@@ -179,7 +179,8 @@ angular.module('pooler')
       }
 
       this.acceptRequest = function(matchid){
-        var acceptorUberid = data['user']['uberid'];
+        var acceptorUberid = data['user']['uberid'],
+            deferred = $q.defer();
         $http({
           url: API_HOST + '/trips/acceptRequest',
           method: "POST",

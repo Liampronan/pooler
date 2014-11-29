@@ -60,7 +60,7 @@ exports.requestTrip = function(req, res){
           departureCoords: requestInfo.departureCoords
         }
       };
-
+  console.log('requestorTripInfo', requestorTripInfo);
 
   if (requestorTripInfo){
     matchForRequestor = {

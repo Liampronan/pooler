@@ -266,8 +266,7 @@ ctrlModule
           },
           setByUser: false //track whether user has set this yet b/c has default coords
         }
-      ]
-      console.log('hai markers', $scope.markers);
+      ];
     }
 
   }]);
