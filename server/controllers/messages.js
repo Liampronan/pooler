@@ -4,6 +4,13 @@ var Message  = mongoose.model('Pmessage');
 var ObjectId = require('mongoose').Types.ObjectId;
 var utils = require('../../lib/utils');
 
+var EventEmitter = require('events').EventEmitter,
+  messageEmitter;
+
+mongoose.set('debug', true);
+
+exports.messageEmitter = messageEmitter = new EventEmitter();
+
 
 exports.create = function(req, res){
 
@@ -14,10 +21,12 @@ exports.create = function(req, res){
         toUberid: toUberid,
         fromUberid: fromUberid,
         message: messageText
-      });
+      }),
+      messageUberids = [toUberid, fromUberid];
 
   message.save(function(err, message){
     if (err) console.error(err);
+    messageEmitter.emit('newMessage', messageUberids)
     return res.json(200, message)
   })
 }

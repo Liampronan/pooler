@@ -1,26 +1,33 @@
 var ctrlModule = angular.module('pooler.controllers');
 ctrlModule
   .controller('MatchesCtrl', ['$scope', '$state', 'userService', '$ionicModal', 'matchForTripFilter', 'matchUserFilter',
-    'tripForMatchFilter', 'GoogleMapApi'.ns(), '$filter', '$window', 'messageService', 'nearbyService',
+    'tripForMatchFilter', 'GoogleMapApi'.ns(), '$filter', '$window', 'messageService', 'nearbyService', 'uberAuthService',
     function ($scope, $state, userService, $ionicModal, matchForTripFilter, matchUserFilter, tripForMatchFilter,
-              GoogleMapApi, $filter, $window, messageService, nearbyService) {
+              GoogleMapApi, $filter, $window, messageService, nearbyService, uberAuthService) {
     var tripIndex = $state.params.tripIndex || 0,
         matchesUsers,
         mapid = 0;
 
     //setUser(user, bustCache)
     userService.setUser(false, true).then(function(user){
-      userService.retrieveMatchesUsers().then(function(){
+//      userService.retrieveMatchesUsers().then(function(){
         setTripMatches(user);
         //set initial trip
         $scope.setTrip(tripIndex);
-      });
+//      });
 
     });
+
+    $scope.nearTripDepartureTime = function(){
+        return false
+    }
+
     $scope.trips = userService.getTrips();
       
     $scope.acceptRequest = function(){
-        userService.acceptRequest($scope.tripMatch.id)
+        userService.acceptRequest($scope.tripMatch.id).then(function(){
+          $scope.tripMatch.requestInfo.accepted = true;
+        })
     }
 
     $scope.sendMessage = function(){
@@ -31,13 +38,12 @@ ctrlModule
     }
       
     $scope.requestTrip = function(){
-
       var requestInfo =  {
         departureTime: $scope.tripMatch.requestInfo.departureTime,
           departureAddress:  $scope.markers[2].meetupPoint,
           departureCoords: { latitude: $scope.markers[2].departCoords.latitude, longitude: $scope.markers[2].departCoords.longitude}
       }
-      nearbyService.requestTrip($scope.tripMatch.matchTrip, $scope.tripMatchUser, requestInfo, $scope.tripMatch).then(function(){
+      nearbyService.requestTrip($scope.tripMatch.matchTrip, $scope.tripMatchUser, requestInfo, $scope.trip).then(function(){
         $scope.tripMatch.requestInfo.requestorid = $scope.user.uberid;
       })
     }
@@ -80,9 +86,6 @@ ctrlModule
           $scope.matchNewMessageModal.hide();
         };
       });
-
-
-
 
     function setupMap(){
       $ionicModal.fromTemplateUrl('matches/templates/selectMeetupPointModal.html', {
@@ -163,10 +166,14 @@ ctrlModule
         });
     }
 
-      $scope.$on('matches:updated', function(event, data){
-        $scope.user = userService.getUser();
-        setTripMatches($scope.user);
-      });
+    $scope.$on('matches:updated', function(event, data){
+      $scope.user = userService.getUser();
+      setTripMatches($scope.user);
+      $scope.setTrip(tripIndex);
+    });
+    $scope.$on('messages:updated', function(event, data){
+      setMessages();
+    });
 
     function setMessages(){
       $scope.messages = messageService.getMessagesWith($scope.tripMatchUser.uuid || $scope.tripMatchUser.uberid);
@@ -191,6 +198,19 @@ ctrlModule
           if ($scope.selectMeetupPointModal) $scope.selectMeetupPointModal.remove();
           setupMap();
           setMarkers();
+
+          var uberClientId = uberAuthService.clientId,
+              requestURL =
+              "uber://?client_id=" + uberClientId + "&action=setPickup" +
+                "&pickup[latitude]=" + $scope.tripMatch.requestInfo.departureCoords.latitude +
+                "&pickup[longitude]=" + $scope.tripMatch.requestInfo.departureCoords.longitude +
+                "&pickup[formatted_address]=" + $scope.tripMatch.requestInfo.departureAddress.formatted_address.replace(' ', '%20') +
+                "&pickup[nickname]=" + $scope.tripMatch.requestInfo.departureAddress.formatted_address.replace(' ', '%20') +
+                "&dropoff[latitude]=" + $scope.tripMatch.matchTrip.arrivalLocation.latitude +
+                "&dropoff[longitude]=" + $scope.tripMatch.matchTrip.arrivalLocation.longitude +
+                "&dropoff[formatted_address]=" + $scope.tripMatch.matchTrip.arrivalLocation.formattedAddress.replace(' ', '%20');
+
+          $scope.requestUberURL = requestURL;
         }
         $scope.loaded = true;
       };

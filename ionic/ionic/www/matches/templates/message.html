@@ -1,18 +1,31 @@
 <div class="no-padding no-message  message no-margin-bottom">
-  <button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius" ng-if="messages.length === 0 ">
-    <i class="icon ion-ios7-chatbubble-outline"></i>
-    {{ 'SEND' | translate }} {{ tripMatchUser.first_name || tripMatchUser.firstName }} {{ 'A_MESSAGE' | translate }}
-  </button>
+  <!--<button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius" ng-if="messages.length === 0 ">-->
+    <!--<i class="icon ion-ios7-chatbubble-outline"></i>-->
+    <!--{{ 'SEND' | translate }} {{ tripMatchUser.first_name || tripMatchUser.firstName }} {{ 'A_MESSAGE' | translate }}-->
+  <!--</button>-->
 
-  <button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius"
-     ng-if="messages.length > 0">
-    <i class="icon ion-ios7-chatboxes-outline"></i>
-    {{ 'VIEW_MESSAGES_WITH' | translate }} {{ tripMatchUser.first_name || tripMatchUser.firstName }}
-    <span ng-class="{'badge-positive': numMessagesUnread > 0,
-                     'badge': numMessagesUnread > 0}">
-      {{ numMessagesUnread > 0 ? numMessagesUnread : "" }}
-    </span>
-  </button>
+  <!--<button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius"-->
+     <!--ng-if="messages.length > 0">-->
+    <!--<i class="icon ion-ios7-chatboxes-outline"></i>-->
+    <!--{{ 'VIEW_MESSAGES_WITH' | translate }} {{ tripMatchUser.first_name || tripMatchUser.firstName }}-->
+    <!--<span ng-class="{'badge-positive': numMessagesUnread > 0,-->
+                     <!--'badge': numMessagesUnread > 0}">-->
+      <!--{{ numMessagesUnread > 0 ? numMessagesUnread : "" }}-->
+    <!--</span>-->
+  <!--</button>-->
+  <div class="button-bar request-accepted">
+    <button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius">
+      <i class="icon ion-ios7-chatbubble-outline"></i>
+      {{ 'MESSAGE' | translate }}
+    </button>
+    <a href="{{ requestUberURL }}" class="button button-royal button-full margin-auto sm-border-radius"
+      >
+      <!--ng-disabled="!nearTripDepartureTime()"-->
+      <i class="icon"><img class="uber-logo" ng-src="img/uber_badge.png" alt=""/></i>
+      &nbsp;&nbsp; {{ 'REQUEST_UBER' | translate }}
+    </a>
+  </div>
+
 
 </div>
 

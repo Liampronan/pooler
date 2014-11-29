@@ -284,7 +284,7 @@ input.my-trip{
 }
 
 .trip-select ul.matches-trip-match li:not(:last-child){
-    margin-bottom: -11%;
+    margin-bottom: -18%;
 }
 
 .trip-select ul:not(.matches-trip-match) li:not(:last-child){
@@ -582,4 +582,18 @@ ion-content.has-header{
 /*back-button-fix for android*/
 .button-icon.ion-ios7-arrow-back{
     width: 20% !important;
+}
+
+i .uber-logo{
+    width: 20px;
+    position: absolute;
+    left: 3px;
+    bottom: 1px;
+    /*vertical-align: text-top;*/
+    top: 13px;
+    margin-left: 2.5px;
+}
+
+.button-bar.request-accepted button, a{
+    font-size: 14px !important;
 }

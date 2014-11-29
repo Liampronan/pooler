@@ -9,8 +9,8 @@
     <a class="item button button-stable button-full trip-select no-margin"  ng-repeat="trip in trips"
       ng-click="setTrip($index)">
       <ul>
-        <li><b>{{ 'DEPART' | translate }}:</b> {{ trip.departureLocation.formattedAddress | formatStreetAddress }}</li>
-        <li><b>{{ 'ARRIVE' | translate }}:</b> {{ trip.arrivalLocation.formattedAddress | formatStreetAddress }}</li>
+        <li><b>{{ 'DEPART' | translate }}:</b> {{ trip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}</li>
+        <li><b>{{ 'ARRIVE' | translate }}:</b> {{ trip.arrivalLocation.formattedAddress | formatStreetAddress | displayStreet }}</li>
         <li><b>{{ 'TIME' | translate }}:</b> {{ trip.departureTime| formatTime }}</li>
         <li ng-if="trip.recurring">
           <!--TODO: translate-->

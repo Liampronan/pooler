@@ -68,7 +68,8 @@ angular.module('pooler')
       'BUFFER_WINDOW': 'buffer window',
       'DASHBOARD': 'Dashboard',
       'NEARBY_RIDES': 'Nearby Rides',
-      'BACK': 'Back'
+      'BACK': 'Back',
+      'REQUEST_UBER': 'Request Uber'
     });
 
     $translateProvider.translations('zh', {
@@ -138,7 +139,8 @@ angular.module('pooler')
       'BUFFER_WINDOW': '缓冲',
       'DASHBOARD': '仪表盘',
       'NEARBY_RIDES': '附近的柔晶元素',
-      'BACK': '背部'
+      'BACK': '背部',
+      'REQUEST_UBER': 'Request Uber'
     });
 
     $translateProvider.preferredLanguage('en');

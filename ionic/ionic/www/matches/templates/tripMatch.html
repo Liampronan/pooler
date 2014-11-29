@@ -15,7 +15,7 @@
           <ul class="text-left matches-trip-match">
 
             <li><b>{{ 'DEPART' | translate }}:</b> {{ tripMatchUserTrip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}</li>
-            <li><b>{{ 'ARRIVE' | translate }}:</b> {{ tripMatchUserTrip.arrivalLocation.formattedAddress | formatStreetAddress  }}</li>
+            <li><b>{{ 'ARRIVE' | translate }}:</b> {{ tripMatchUserTrip.arrivalLocation.formattedAddress | formatStreetAddress  | displayStreet }}</li>
             <li><b>{{ 'TIME' | translate }}:</b> {{ tripMatchUserTrip.departureTime| formatTime }}</li>
             <li><b>{{ 'BUFFER' | translate }}:</b> +/- {{ tripMatchUserTrip.bufferWindow }} {{ 'MIN' | translate }}</li>
             <li ng-if="trip.recurring">
@@ -32,12 +32,12 @@
 
 
   <div>
-    <p class="text-center light-font" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip">
+    <p class="text-center light-font" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip && !tripMatch.requestInfo.requestorid">
       {{ 'TO_REQUEST_PICK_INFO' | translate }}
     </p>
 
 
-    <div class="row" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip">
+    <div class="row" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip && !tripMatch.requestInfo.requestorid">
       <div class="margin-auto">
         <button class="text-center button button-small meetup-point" ng-click="showSelectMeetupPointModal()">
           <i class="icon ion-pin placeholder-icon"></i>
@@ -52,7 +52,7 @@
 
   <div class="row no-padding-bottom">
     <div class="col col-offset-20 no-padding-top">
-      <p ng-if="markers[2].setByUser || tripMatch.userTrip.isMatchTrip || tripMatch.requestInfo.isMatchTrip"
+      <p ng-if="markers[2].setByUser || tripMatch.userTrip.isMatchTrip || tripMatch.requestInfo.isMatchTrip || tripMatch.requestInfo.requestorid"
          class="meet-at trip-match-color no-margin-bottom trip-info-text">
         <b>{{ 'MEET_AT' | translate }}:</b>
         {{ (markers[2].meetupPoint.formatted_address || tripMatch.requestInfo.departureAddress.formatted_address)
@@ -106,7 +106,7 @@
   <div class="row"
        ng-if="tripMatch.requestInfo.accepted">
     <div class="margin-auto">
-      <button class="text-center button button-balanced meetup-request button-clear icon-left  ion-android-checkmark"
+      <button class="text-center button button-small button-balanced meetup-request button-clear icon-left  ion-android-checkmark"
               ng-click="acceptRequest()">
         <!--<i class="icon placeholder-icon"></i>-->
         {{ 'ACCEPTED' | translate }}

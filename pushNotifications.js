@@ -4,7 +4,8 @@ var gcm = require('node-gcm'),
     User = mongoose.model('Puser'),
     tripMatchEmitter = require('./server/controllers/users').tripMatchEmitter,
     matchRequestEmitter = require('./server/controllers/trips').tripRequestEmitter,
-    tripAcceptedEmitter = require('./server/controllers/trips').tripAcceptedEmitter;
+    tripAcceptedEmitter = require('./server/controllers/trips').tripAcceptedEmitter,
+    messageEmitter = require('./server/controllers/messages').messageEmitter;
     tripMatchEmitter.setMaxListeners(0);
     matchRequestEmitter.setMaxListeners(0);
     tripAcceptedEmitter.setMaxListeners(0);
@@ -63,6 +64,21 @@ tripAcceptedEmitter.on('tripAccepted', function(requestor){
   };
 
   sendPushNotification([requestor], options);
+
+});
+
+messageEmitter.on('newMessage', function (messageUberIds) {
+
+  User.find({ uberid: { $in: messageUberIds } }, function(err, users){
+    if (err) console.error(err);
+
+    var options = {
+      droidTitle: 'Pooler: New Message',
+      message: 'New message from a matched rider'
+    };
+
+    sendPushNotification(users, options);
+  })
 
 });
 

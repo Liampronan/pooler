@@ -88,63 +88,8 @@ angular.module('pooler')
         messageNotificationHandler(event);
       });
 
-      function messageNotificationHandler(event){
-        //get convert "0" to false for iOS
-        event.foreground = event.foreground === '0' ? false : event.foreground
-        //show new Match Pop if the app is in foreground (otherwise, don't b/c user already saw notification)
-        console.log('ev', event);
-        if (event.foreground && !$rootScope.matchMessageModelShown && androidOriOSMessage(event) ){
-          newMessagePopup();
-        } else if (!event.foreground && androidOriOSMessage(event)){
-          $state.go('tab.matches');
-        }
-        if (androidOriOSMessage(event)){
-          console.log('getting messages?');
-          userService.getUser().then(function (user) {
-            currentUser = user;
-            console.log('msg service curr u', currentUser)
-            retrieveUserMessages().then(function (success) {
-              data['messages'] = success.data;
-              $rootScope.$broadcast('messages:updated');
-            })
-          });
+     this.updateMessage = retrieveUserMessages;
 
-        }
-      }
-
-      function androidOriOSMessage(event){
-        return androidMessage(event) || iOSMessage(event)
-      }
-
-      function androidMessage(event){
-        return event.payload && event.payload.message.toLowerCase().indexOf('message') > -1
-      }
-
-      function iOSMessage(event){
-        return event.alert && event.alert.toLowerCase().indexOf('message') > -1
-      }
-
-      //alert user of new match
-      function newMessagePopup(){
-        $ionicPopup.confirm({
-          title: '<b>New Message</b>',
-          template: '<p class="text-center">You have a new message from one of your matches!</p>',
-          buttons: [
-            {
-              text: 'Close',
-              type: 'button-default'
-            },
-            {
-              text: 'View',
-              type: 'button-positive',
-              onTap: function(e) {
-                // e.preventDefault() will stop the popup from closing when tapped.
-                $state.go('tab.matches');
-              }
-            }
-          ]
-        });
-      }
 
 
       function retrieveUserMessages(){

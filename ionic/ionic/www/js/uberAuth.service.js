@@ -8,7 +8,7 @@ angular.module('pooler')
         authUrl = "https://liampronan.com" + '/auth/uber/',
         userProfile;
 
-
+      this.clientId = clientId;
       this.login = function () {
         var deferred = $q.defer();
         //open IAB window

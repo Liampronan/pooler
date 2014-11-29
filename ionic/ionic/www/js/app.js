@@ -47,10 +47,13 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
   });
 })
 
-.config(['$stateProvider', '$urlRouterProvider', 'GoogleMapApiProvider'.ns(), '$ionicTabsConfig',
-  function($stateProvider, $urlRouterProvider, GoogleMapApi, $ionicTabsConfig) {
+.config(['$stateProvider', '$urlRouterProvider', 'GoogleMapApiProvider'.ns(), '$ionicTabsConfig', '$compileProvider',
+  function($stateProvider, $urlRouterProvider, GoogleMapApi, $ionicTabsConfig, $compileProvider) {
 
-  $stateProvider
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|uber):/);
+
+
+    $stateProvider
     // setup an abstract state for the tabs directive
     .state('tab', {
       url: "/tab",
