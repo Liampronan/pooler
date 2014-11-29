@@ -40,6 +40,7 @@ exports.requestTrip = function(req, res){
       requestorUberid = requestorUserInfo.uberid,
       requestedTripInfo = req.body.requestedTripInfo,
       requestedUserInfo = req.body.requestedUserInfo,
+
       requestInfo = req.body.requestInfo,
       requestedUberid = requestedUserInfo.uuid,
       matchId = Math.random().toString(36).substr(2, 9),
@@ -69,6 +70,8 @@ exports.requestTrip = function(req, res){
           departureCoords: requestInfo.departureCoords
         }
       };
+
+  console.log('requestedU', requestedUserInfo);
 
   requestedTripInfo.isMatchTrip = true;
   User.findOneAndUpdate({ uberid: requestedUberid },
