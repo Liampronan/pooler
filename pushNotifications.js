@@ -37,7 +37,7 @@ tripMatchEmitter.on('tripMatch', function(matchUsersUberids){
 function sendPushNotification(users, options){
   console.log('sending push to', users);
   users.forEach(function(user){
-    if (!user.pushInfo.regid ) return //no device registered - helpful for testing and users w/o push
+    if (!user.pushInfo || !user.pushInfo.regid ) return //no device registered - helpful for testing and users w/o push
     if (user.pushInfo.device === 'iOS'){
       sendAPN(user, options);
     } else if (user.pushInfo.device === 'Android'){
