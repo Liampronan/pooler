@@ -181,7 +181,7 @@ angular.module('pooler')
               type: 'button-default'
             },
             {
-              text: 'View Trip',
+              text: 'View Message',
               type: 'button-energized',
               onTap: function(e) {
                 // e.preventDefault() will stop the popup from closing when tapped.

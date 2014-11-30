@@ -5,14 +5,17 @@ angular.module('pooler')
       var data = {
           messages: []
         },
-        _this = this,
-        currentUser = userService.getUser();
+        _this = this;
 
-      console.log('msg service curr u', currentUser)
-      retrieveUserMessages().then(function (success) {
-        data['messages'] = success.data;
-        console.log(data['messages']);
+      userService.setUser().then(function(){
+        currentUser = userService.getUser();
+        console.log(currentUser);
+        retrieveUserMessages().then(function (success) {
+          data['messages'] = success.data;
+          console.log('messages', data['messages']);
+        })
       })
+
 
       this.create = function(toUberid, fromUberid, message){
         var deferred = $q.defer();
@@ -73,22 +76,7 @@ angular.module('pooler')
         }
       }
 
-//      socket.on('newMessage', function (messageData) {
-//        if (messageData.toLinkedInUserId === currentUser.linkedInUserId) {
-//          retrieveUserMessages().then(function (success) {
-//            data['messages'] = success.data;
-//            $rootScope.$broadcast('messages:updated');
-//            newMessagePopup()
-//          })
-//        }
-//      });
-
-      // receive notification
-      $rootScope.$on('pushNotificationReceived', function(notification, event) {
-        messageNotificationHandler(event);
-      });
-
-     this.updateMessage = retrieveUserMessages;
+     this.updateMessages = retrieveUserMessages;
 
 
 
@@ -103,6 +91,7 @@ angular.module('pooler')
           }
         }).then(function(messages){
             deferred.resolve(messages);
+            data['messages'] = messages.data;
           }, function(error){
             console.log(error);
           })

@@ -597,3 +597,8 @@ i .uber-logo{
 .button-bar.request-accepted button, a{
     font-size: 14px !important;
 }
+
+.tab-item.en i {
+    padding-left: 10px;
+    padding-right: 10px !important;
+}

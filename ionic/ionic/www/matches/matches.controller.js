@@ -172,6 +172,7 @@ ctrlModule
       $scope.setTrip(tripIndex);
     });
     $scope.$on('messages:updated', function(event, data){
+      console.log('updatinng msgzzz');
       setMessages();
     });
 
@@ -198,8 +199,8 @@ ctrlModule
           if ($scope.selectMeetupPointModal) $scope.selectMeetupPointModal.remove();
           setupMap();
           setMarkers();
-
-          var uberClientId = uberAuthService.clientId,
+          if ($scope.tripMatch.requestInfo){
+            var uberClientId = uberAuthService.clientId,
               requestURL =
               "uber://?client_id=" + uberClientId + "&action=setPickup" +
                 "&pickup[latitude]=" + $scope.tripMatch.requestInfo.departureCoords.latitude +
@@ -210,7 +211,8 @@ ctrlModule
                 "&dropoff[longitude]=" + $scope.tripMatch.matchTrip.arrivalLocation.longitude +
                 "&dropoff[formatted_address]=" + $scope.tripMatch.matchTrip.arrivalLocation.formattedAddress.replace(' ', '%20');
 
-          $scope.requestUberURL = requestURL;
+            $scope.requestUberURL = requestURL;
+          }
         }
         $scope.loaded = true;
       };

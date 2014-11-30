@@ -22,7 +22,8 @@ exports.create = function(req, res){
         fromUberid: fromUberid,
         message: messageText
       }),
-      messageUberids = [toUberid, fromUberid];
+      //only push to receiver
+      messageUberids = [toUberid];
 
   message.save(function(err, message){
     if (err) console.error(err);
