@@ -374,3 +374,13 @@ function addToUserMatches(userUberid, trip, matchId, userTrip){
                          }).exec()
 }
 
+//
+//var minutes = 15,
+//    interval = minutes * 60 * 1000;
+//setInterval(function() {
+//  console.log("I am doing my 5 minutes check");
+//  // do your stuff here
+//}, invterval);
+
+
+//db.pusers.find({$and: [{matches: {$elemMatch: {"requestInfo.accepted": true}, }}]}, {"matches.$": true}).pretty()

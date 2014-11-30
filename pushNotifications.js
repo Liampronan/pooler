@@ -12,13 +12,13 @@ var gcm = require('node-gcm'),
 
 
 //apple push noticiations
-//var apn = require('apn'),
-//  options = {
-//    cert: 'dist_cert.pem',
-//    key: 'prod_dist.pem',
-//    production: true
-//  },
-//  apnConnection = new apn.Connection(options);
+var apn = require('apn'),
+  options = {
+    cert: 'pool_aps_prod_cert.pem',
+    key: 'pooler_priv_key.pem',
+    production: true
+  },
+  apnConnection = new apn.Connection(options);
 
 //testing
 //User.findOne({pushInfo: {$exists: true}}, function(err, user){

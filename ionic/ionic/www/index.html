@@ -79,4 +79,11 @@
     -->
     <ion-nav-view></ion-nav-view>
   </body>
+
+  <script>
+    var hideKeyboard = function() {
+      document.activeElement.blur();
+      $("input").blur();
+    };
+  </script>
 </html>

@@ -19,8 +19,8 @@
       {{ 'MESSAGE' | translate }}
     </button>
     <a href="{{ requestUberURL }}" class="button button-royal button-full margin-auto sm-border-radius"
-      >
-      <!--ng-disabled="!nearTripDepartureTime()"-->
+       ng-disabled="!nearTripDepartureTime()">
+
       <i class="icon"><img class="uber-logo" ng-src="img/uber_badge.png" alt=""/></i>
       &nbsp;&nbsp; {{ 'REQUEST_UBER' | translate }}
     </a>

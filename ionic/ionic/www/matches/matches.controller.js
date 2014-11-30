@@ -18,9 +18,7 @@ ctrlModule
 
     });
 
-    $scope.nearTripDepartureTime = function(){
-        return false
-    }
+
 
     $scope.trips = userService.getTrips();
       
@@ -172,7 +170,6 @@ ctrlModule
       $scope.setTrip(tripIndex);
     });
     $scope.$on('messages:updated', function(event, data){
-      console.log('updatinng msgzzz');
       setMessages();
     });
 
@@ -212,6 +209,14 @@ ctrlModule
                 "&dropoff[formatted_address]=" + $scope.tripMatch.matchTrip.arrivalLocation.formattedAddress.replace(' ', '%20');
 
             $scope.requestUberURL = requestURL;
+          }
+          $scope.nearTripDepartureTime = function(){
+            var departureTime =  moment($scope.tripMatch.matchTrip.departureTimeStamp),
+                now = moment(new Date),
+                timeDiff = moment(now.subtract(departureTime)).format("HH:mm:ss");
+
+
+            return timeDiff > "00:00" && timeDiff < "00:15"
           }
         }
         $scope.loaded = true;

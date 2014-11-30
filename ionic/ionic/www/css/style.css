@@ -399,7 +399,7 @@ button.trip-selector-add-trip{
 }
 
 p.meet-at{
-    margin-left: 7.5%;
+    margin-left: 7%;
 }
 
 .trip-match-color{
@@ -601,4 +601,8 @@ i .uber-logo{
 .tab-item.en i {
     padding-left: 10px;
     padding-right: 10px !important;
+}
+
+.uber-request-info{
+    font-size: 12.5px;
 }

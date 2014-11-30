@@ -43,7 +43,7 @@ angular.module('pooler')
       'MEANTIME_CHECKOUT_TRIPS': 'In the meantime, checkout trips near you',
       'BROWSE_NEARBY_TRIPS': 'Browse Nearby Trips',
       'DRAG_TO_MEETUP_LOCATION': 'Drag the green point to your desired meetup location',
-      'BUFFER': 'buffer',
+      'BUFFER': 'Buffer',
       'MIN': 'min.',
       'MEET_HERE': 'Meet Here',
       'SET_MEETUP_POINT': 'Set Meetup Point',
