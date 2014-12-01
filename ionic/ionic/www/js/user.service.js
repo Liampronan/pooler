@@ -40,7 +40,7 @@ angular.module('pooler')
 
       this.updatePushInfo = function(){
           var deferred = $q.defer(),
-              regid = data['ACMRegid'] || data['APNRegid'],
+              regid = data['APNRegid'] || data['ACMRegid'],
               device = data['ACMRegid'] ? 'Android' : 'iOS',
               uberid = data['user']['uberid'],
               pushInfo = {

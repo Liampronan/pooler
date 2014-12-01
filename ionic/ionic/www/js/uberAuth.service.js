@@ -40,19 +40,17 @@ angular.module('pooler')
 //      get code from response url
 //        var code = output.url.toString(), //non-google hack
 //        var code = output.url[0].toString(),
-        var code = output.url[0].toString(),
-          uberIdRegex = /uberId=(.*)&f/,
-          firstNameRegex = /&firstName=(.*)&/,
-          profilePictureRegex = /&profilePicture=(.*)/,
+        var code = output.response[0].toString();
+        console.log('code', code);
+        console.log(output.response);
+        var uberIdRegex = /uberId=(.*)&amp;f/,
+          firstNameRegex = /firstName=(.*)&/,
+          profilePictureRegex = /profilePicture=(.*)/;
           firstName = code.match(firstNameRegex)[1],
-          uberId = code.match(uberIdRegex)[1],
+          uberId =  code.match(uberIdRegex)[1],
           profilePicture = code.match(profilePictureRegex)[1],
           user = { firstName: firstName, uberid: uberId, profilePicture: profilePicture };
 
-        console.log('user', user);
-        console.log('user', user.firstName);
-        console.log('user', user.uberid);
-        console.log('user', user.profilePicture);
         userProfile = user;
       }
 

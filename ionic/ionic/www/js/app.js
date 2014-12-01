@@ -10,7 +10,7 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
 
 .constant('API_HOST', 'https://liampronan.com/api')
 
-.run(function($ionicPlatform, $cordovaPush, $cordovaDevice, pushConfigService, pushNotificationReceiverService) {
+.run(function($ionicPlatform, $cordovaPush, $cordovaDevice, pushConfigService, pushNotificationReceiverService, userService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -29,9 +29,11 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
       console.log('helloo you will get this..');
       $cordovaPush.register(pushConfigService.iosConfig).then(function(result) {
         console.log('¡iOS', result);
+        alert('resuult' + result);
         userService.setAPNRegid(result);
       }, function(err) {
         console.log(':<', err);
+        alert('err' + err);
         // An error occured. Show a message to the user
       });
     } else if (platform === 'Android'){

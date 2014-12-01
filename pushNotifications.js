@@ -35,6 +35,7 @@ tripMatchEmitter.on('tripMatch', function(matchUsersUberids){
       
       var options = {
         droidTitle: 'Pooler: Trip Match',
+        iOSTitle: 'New match for one of your trips',
         message: 'New match for one of your trips'
       };
 
@@ -48,6 +49,7 @@ matchRequestEmitter.on('matchRequest', function(requestedUberid){
 
     var options = {
       droidTitle: 'Pooler: Trip Request',
+      iOSTitle: 'New trip request for one of your trips',
       message: 'New trip request for one of your trips'
     };
 
@@ -60,6 +62,7 @@ tripAcceptedEmitter.on('tripAccepted', function(requestor){
 
   var options = {
     droidTitle: 'Pooler: Trip Request Accepted',
+    iOSTitle: 'One of your matches accepted your trip request',
     message: 'One of your matches accepted your trip request'
   };
 
@@ -74,6 +77,7 @@ messageEmitter.on('newMessage', function (messageUberIds) {
 
     var options = {
       droidTitle: 'Pooler: New Message',
+      iOSTitle: 'New message from a matched rider',
       message: 'New message from a matched rider'
     };
 
