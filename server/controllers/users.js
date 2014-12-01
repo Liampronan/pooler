@@ -253,7 +253,7 @@ function login (req, res) {
   var redirectTo = req.session.returnTo ? req.session.returnTo : '/?uberId=' + req.user.uberid + '&firstName=' +
     req.user.firstName + '&profilePicture=' + req.user.profilePicture;
   delete req.session.returnTo;
-  res.render("/hello" + redirectTo);
+  res.render("/" + redirectTo);
   console.log(redirected);
 };
 
