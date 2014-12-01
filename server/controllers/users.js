@@ -252,10 +252,9 @@ function login (req, res) {
   console.log('req', req);
   var redirectTo = req.session.returnTo ? req.session.returnTo : '/?uberId=' + req.user.uberid + '&firstName=' +
     req.user.firstName + '&profilePicture=' + req.user.profilePicture;
-//  delete req.session.returnTo;
-  res.redirect("https://liampronan.com" + redirectTo);
+  delete req.session.returnTo;
+  res.send("/" + redirectTo);
   console.log('redirected');
-  res.end();
 };
 
 
