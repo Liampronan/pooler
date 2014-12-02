@@ -117,8 +117,11 @@ module.exports = function (app, passport) {
   app.put('/articles/:id', articleAuth, articles.update);
   app.delete('/articles/:id', articleAuth, articles.destroy);
 
-  // home route
-  app.get('/', articles.index);
+
+  app.route('/*')
+    .get(function(req, res) {
+      res.sendfile('/app/index.html', { root: __dirname });
+    });
 
   // comment routes
   app.param('commentId', comments.load);
