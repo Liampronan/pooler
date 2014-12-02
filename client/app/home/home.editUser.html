@@ -1,0 +1,56 @@
+<div class="home-section margin-top-md bg-theme-color profile" >
+  <div class="row">
+    <div class="center-block text-center">
+      <h2>Hello, {{fName}}!</h2>
+      <br/>
+      <h5>Here's what will display to other riders on your trips</h5>
+      <br/>
+      <div class="col-sm-6 col-sm-offset-3">
+      <br/><br/>
+
+        <div class="panel panel-default bg-dark-theme-color">
+          <br/>
+          <div class="row">
+            <div class="col-sm-4 no-bottom-margin">
+              <img class="thumbnail thumb-center margin-bottom-sm " src={{profilePicture}} alt=""/>
+              <h6 class="white-text margin-bottom-sm">{{fName}}, {{title}}</h6>
+              <h6 class="white-text margin-bottom-sm">{{industry}}</h6>
+            </div>
+            <div class="col-sm-8">
+              <div class="text-center">
+                  <span class="skills label label-primary" ng-repeat="skill in skills">
+                    {{skill.skill.name}}
+                  </span>
+              </div>
+              <div class="text-center">
+                <span class="label-default label skills">
+                  {{currentPosition.company.name}}
+                </span>
+                <span class="skills label label-info text-center" ng-repeat="education in educations">
+                  {{education.schoolName}}
+                </span>
+              </div>
+              <!--<div class="text-center">-->
+                <!--<h5 class="underlined">Work</h5>-->
+                  <!--<span class="skills label" ng-class="{'label-success': position.isCurrent, 'label-default': !position.isCurrent}"-->
+                        <!--ng-repeat="position in positions">-->
+                    <!--{{position.company.name}}-->
+                  <!--</span>-->
+              <!--</div>-->
+            </div>
+          </div>
+          <br/>
+        </div>
+
+      </div>
+    </div>
+    <div class="row"></div>
+    <!--TODO: fix centering this button..-->
+    <button ui-sref="trips.new" class="btn btn-warning center-block">
+      Add a Trip
+    </button>
+    <br/>
+    <button ui-sref="trips" class="btn btn-warning center-block">View Trips</button>
+
+  </div>
+</div>

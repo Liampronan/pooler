@@ -40,6 +40,11 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('./config/config');
+var path = require('path');
+
+
+app.use(express.static(path.join(config.root, 'client')));
+
 
 var port = process.env.PORT || 9000;
 

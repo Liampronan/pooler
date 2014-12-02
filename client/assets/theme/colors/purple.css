@@ -1,0 +1,68 @@
+/*
+Notes:
+    Color: #8e44ad
+*/
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+a,
+.btn-nesto-home,
+.btn.btn-nesto-home,
+.panel-title a,
+.panel-title a.collapsed:hover,
+.feature-box-style1:hover .feature-box-title,
+.feature-box-style2:hover .feature-box-title,
+.member-title,
+#newsletter-form button,
+#owl-clients-wrapper .client-name,
+.contactform #form-message {
+    color: #8e44ad;
+}
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+.section-title span:before,
+.section-title-container.color-border .section-title span:after,
+.btn-nesto,
+.btn.btn-nesto,
+.navbar-nav > li:hover,
+.navbar-nav > li.active,
+.panel-title a:before,
+.panel-title a.collapsed:before,
+.static-color #home-section-container:after,
+.owl-home-navigation a:hover,
+.feature-box-icon,
+#video-section,
+.owl-shots div.slide-content a,
+.owl-shots-navigation a:hover,
+.pricing-table:hover .table-price,
+.pricing-table.featured .table-price,
+#subscribe-section,
+#owl-clients-wrapper .owl-theme .owl-controls .owl-page span {
+    background-color: #8e44ad;
+}
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+.feature-box-icon:before {
+    -webkit-border: 2px solid #8e44ad;
+       -moz-border: 2px solid #8e44ad;
+         -o-border: 2px solid #8e44ad;
+            border: 2px solid #8e44ad;
+}
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+.team-member:hover .member-image:after,
+#owl-clients-wrapper:hover .client-img:after,
+.contactform .form-control:hover,
+.contactform .form-control:focus {
+    -webkit-border-color: #8e44ad;
+       -moz-border-color: #8e44ad;
+         -o-border-color: #8e44ad;
+            border-color: #8e44ad;
+}

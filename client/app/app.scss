@@ -1,0 +1,225 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$fa-font-path: "/bower_components/font-awesome/fonts";
+
+//@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+//@import 'font-awesome/scss/font-awesome';
+
+/**
+ * App-wide Styles
+ */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+// Component styles are injected through grunt
+// injector
+//@import 'account/login/login.scss';
+//@import 'admin/admin.scss';
+@import 'main/main.scss';
+@import 'trips/trips.scss';
+// endinjector
+
+.thumb-center{
+  display: inline-block !important;
+}
+
+.no-bottom-margin{
+  margin-bottom: 0px !important;
+}
+
+.skills{
+  margin-right: 10px;
+  font-size: 80% !important;
+  display: inline-block !important;
+}
+
+input.about-me{
+  background-color: white !important;
+  cursor: auto !important;
+}
+
+span.about-me{
+  width: 75px;
+}
+
+.underlined{
+  text-decoration: underline;
+}
+
+.margin-top-md{
+  margin-top: 25px !important;
+}
+
+.margin-bottom-sm{
+  margin-bottom: 5px !important;
+}
+
+.no-top-padding{
+  padding-top: 0px !important;
+}
+
+.white-text{
+  color: #fff !important;
+}
+
+.dark-text{
+  color: #2c3e50;
+}
+
+button.active{
+  background-color: #2c3e50 !important;
+  
+}
+
+#intro-message{
+  margin-bottom: 0px !important;
+}
+
+#header-wrap h5{
+  margin-top: .5% !important;
+  margin-bottom: .5% !important;
+}
+
+#intro-message h5{
+  font-weight: 300;
+}
+
+#intro-message form{
+  margin-bottom: 2%;
+}
+.home-section-container{
+  padding-top: 7.5%;
+}
+
+h5{
+  color: #2c3e50;
+}
+//.train-friends{
+////  margin: auto;
+//
+//  position: fixed;
+//  margin-left: 10%;
+//  margin-right: 10%;
+//  width: 80%;
+//}
+//.overlay{
+//  position: absolute;
+//  z-index: 100;
+//  margin-left: ;
+//  border: 1px solid white;
+//  background-color: #f5f5f5;
+//  border-radius: 10px;
+//  opacity: .8;
+//  margin-top: 7.5%;
+//}
+//.small-margin-bottom{
+//  margin-bottom: 2.5% !important;
+//}
+//.small-margin-left-right{
+//  margin-left: 2.5%;
+//  margin-right: 2.5%;
+//}
+
+.quotation_div {
+  position: relative;
+  display: table;
+  min-height: 345px !important;
+  background: url('../assets/images/Caltrain_bikes_palo_alto.jpg') no-repeat top center;
+  background-size: 100% auto;
+  margin-top: 1.5%;
+}
+//
+//.overlay {
+//  display: table-cell;
+//  vertical-align: top;
+//}
+
+
+p {
+  text-align: center;
+  color: #2c3e50;
+  opacity: .75;
+  background-color: white;
+  font-size: 165%;
+  font-weight: lighter;
+  line-height: 2;
+//  padding: 0% 20%;
+  margin-bottom: 0px;
+//  vertical-align: bottom;
+//  margin-top: 2.5% !important;
+}
+
+//h4.bottom{
+//  vertical-align: bottom;
+//}
+//div.form-group{
+//  margin-top: 10 %;
+//}
+.bottom-overlay{
+  margin-top: 27.5%;
+}
+*{
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.small-margin-top{
+  margin-top: 2%;
+}
+
+.email-input{
+  margin-top: .4%;
+  margin-bottom: .4%;
+}
+
+div.title{
+  background-color: white;
+  opacity: .8;
+  height: 100%;
+}
+
+#header-wrap{
+  background: url(../assets/images/Caltrain_bikes_palo_alto2.jpg) no-repeat;
+  margin-top: 60px;
+//  padding-top: 0px;
+  text-align: center;
+  background-attachment: relative;
+//  background-position: center center;
+//  background-position-y: 15%;
+  min-height: 500px;
+  width: 100%;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+//h1.title{
+//  margin-bottom: .5%;
+//}
+
+
+//
+//div.background-image {
+//  background: url('../assets/images/new_train_friends.jpg') no-repeat center center fixed;
+//  -webkit-background-size: cover;
+//  -moz-background-size: cover;
+//  -o-background-size: cover;
+//  background-size: cover;
+//  min-height: 400px !important;
+//}
+
+//}
+//.background-image{
+//  background: url('../assets/images/new_train_friends.jpg') transparent no-repeat !important;
+//  background-position: center bottom !important;
+////  background-size: contain !important;
+//  background-repeat: no-repeat;
+//  background-attachment:fixed;
+//}

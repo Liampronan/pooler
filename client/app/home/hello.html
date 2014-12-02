@@ -1,0 +1,90 @@
+
+<div id="header-wrap">
+  <div class="title row">
+    <h1 class="text-center title font-weight-100">Pooler</h1>
+    <h3 class="text-center font-weight-100">Ridesharing, planned.</h3>
+    <div class="text-center email-input row">
+      <div class="col-xs-offset-2 col-xs-7 col-sm-offset-4 col-sm-4">
+        <div class="row">
+          <form name="emailForm">
+            <div class="col-xs-6">
+              <input type="email" class="form-control" id="email" placeholder="Enter email.."  ng-model="email" required
+                     ng-disabled="emailSaved">
+            </div>
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary" ng-click="saveEmail()" ng-disabled="emailForm.$invalid"
+                      ng-if="!emailSaved">
+                Notify me when it's released
+              </button>
+              <button type="submit" class="btn btn-success"
+                      ng-if="emailSaved">
+                <i>✓ &nbsp;</i> We'll email you when it's ready!
+              </button>
+            </div>
+          </form>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  <!--<div class='bottom-overlay'>-->
+    <!--<p class="">Every day over 50,000 people ride Caltrain <br/>-->
+      <!--They all have something to share</p>-->
+  <!--</div>-->
+
+</div>
+<div class="text-center">
+  <div class="row small-margin-top text-center" style=" position : absolute;
+      bottom : 0;
+      height : 40px;
+     width: 100%;
+      margin-top : 40px;">
+    <div class="text-center">
+      <a href="mailto:hello@hitcher.us?subject=Pooler is Awesome!">
+        <button class="btn btn-default">Have Feedback? Get in touch!</button>
+      </a>
+      <a href="https://www.youtube.com/watch?v=md7eD4eWIgw" target="_">
+        <button class="btn btn-info">Watch Demo</button>
+      </a>
+    </div>
+  </div>
+</div>
+<!--<div class="home-section-container ">-->
+  <!--<header id="intro-message" >-->
+    <!--<div class="row">-->
+      <!--<h1 class="text-center white-text">Hitcher</h1>-->
+      <!--<h3 class="text-center">Connect on Your Caltrain Commute</h3>-->
+      <!--<h5>Coming soon to Google and Apple App Stores...</h5>-->
+      <!--<form class="form-inline col-xs-12" role="form" name="emailForm">-->
+        <!--<div class="form-group">-->
+          <!--<input type="email" class="form-control" id="email" placeholder="Enter email.."  ng-model="email" required-->
+            <!--ng-disabled="emailSaved">-->
+          <!--<button type="submit" class="btn btn-primary" ng-click="saveEmail()" ng-disabled="emailForm.$invalid"-->
+            <!--ng-if="!emailSaved">-->
+            <!--Notify me when it's released-->
+          <!--</button>-->
+          <!--<button type="submit" class="btn btn-success"-->
+                  <!--ng-if="emailSaved">-->
+            <!--<i>✓ &nbsp;</i> We'll email you when it's ready!-->
+          <!--</button>-->
+
+        <!--</div>-->
+      <!--</form>-->
+      <!--<br/>-->
+    <!--</div>-->
+  <!--</header>-->
+<!--</div>-->
+
+
+
+<!--<div class='quotation_div'>-->
+  <!--<div class='overlay'>-->
+    <!--<p class="bottom">Every day over 50,000 people ride Caltrain. Each one of them has something to share.</p>-->
+  <!--</div>-->
+<!--</div>-->

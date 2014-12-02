@@ -1,0 +1,68 @@
+<div class="home-section no-top-padding">
+  <div class="col-sm-8 col-sm-offset-2 text-center ">
+    <h4>Setup a trip so you can find others to connect with</h4>
+    <br/>
+    <h4 class="text-center">New Trip</h4>
+    <div class="col-sm-8 col-sm-offset-2">
+      <form class="form-horizontal panel panel-default bg-theme-color" role="form">
+        <br/>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" ng-class="{active: direction === 'SB'}"
+            ng-click="switchDirection()">
+            South
+          </button>
+          <button type="button" class="btn btn-default" ng-class="{active: direction === 'NB'}"
+                  ng-click="switchDirection()">
+            North
+          </button>
+        </div>
+        <br/>
+        <br/>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-sm-offset-1 control-label dark-text" for="departureStation">Depart from:</label>
+          <div class="col-sm-6">
+            <select class="form-control" ng-model="departureStation" id="departureStation"
+                     ng-options="departureStation.stopName for departureStation in stations">
+          </select>
+
+          </div>
+        </div>
+        <br/>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-sm-offset-1 control-label dark-text" for="arrivalStation" >
+            Arrive at:
+          </label>
+          <div class="col-sm-6">
+            <select class="form-control" ng-model="arrivalStation" id="arrivalStation"
+                    ng-change="findRides(departureStation, arrivalStation)"
+                    ng-options="arrivalStation.stopName for arrivalStation in stations">
+            </select>
+          </div>
+        </div>
+        <br/>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-5 dark-text control-label" for="departureTime">Departure time:</label>
+          <div class="col-sm-3">
+            <select class="form-control" ng-model="departureCaltrainStop" id="departureTime"
+                    ng-options="stop['stops'][0]['departureTime'] for stop in caltrainTrips"
+                    ng-disabled="caltrainTrips.length === 0" ng-class="{disabled: caltrainTrips.length === 0}">
+            </select>
+          </div>
+        </div>
+        <br/>
+        <button class="btn btn-warning" ng-class="{disabled: caltrainTrips.length === 0}">Create Round Trip</button>
+        <button class="btn btn-warning" ng-class="{disabled: caltrainTrips.length === 0}"
+                ng-click="addTrip(departureCaltrainStop, arrivalStation)">
+          Select Trip
+        </button>
+        <br/>
+        <br/>
+      </form>
+    </div>
+
+
+
+    </form>
+    </div>
+  </div>
+</div>
