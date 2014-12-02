@@ -1,5 +1,5 @@
-<div class="trip-modal list card no-margin-bottom">
-  <div class="row">
+<div class="trip-modal list card no-margin-bottom trip-match">
+  <div class="row no-padding-top no-padding-bottom">
     <div class="">
       <div class="picture-container">
         <div class="profile round">
@@ -12,7 +12,7 @@
       <div class="col inline-block match-trip">
 
         <span class="item button trip-select  no-margin no-border background-transparent">
-          <ul class="text-left matches-trip-match">
+          <ul class="text-left matches-trip-match" style="margin-top: -10px">
 
             <li><b>{{ 'DEPART' | translate }}:</b> {{ tripMatchUserTrip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}</li>
             <li><b>{{ 'ARRIVE' | translate }}:</b> {{ tripMatchUserTrip.arrivalLocation.formattedAddress | formatStreetAddress  | displayStreet }}</li>
@@ -29,8 +29,12 @@
       </div>
     </div>
   </div>
-
-
+</div>
+<!--rgba(32, 50, 69, .24)-->
+<div class="card trip-match">
+  <div class="row text-center">
+    <h4 class="text-center margin-auto">{{'MEETUP_INFO' | translate}}</h4>
+  </div>
   <div>
     <p class="text-center light-font" ng-if="!markers[2].setByUser && !tripMatch.userTrip.isMatchTrip && !tripMatch.requestInfo.requestorid">
       {{ 'TO_REQUEST_PICK_INFO' | translate }}
@@ -49,8 +53,28 @@
 
 
 
+  <div class="row meet-at-display small-padding-top" >
+    <div class="col request-status-button-container"
+         ng-if="tripMatch.requestInfo.accepted">
+      <div class="margin-auto">
+        <button class="text-center button button-small button-balanced meetup-request button-clear icon-left  ion-android-checkmark">
+          <!--<i class="icon placeholder-icon"></i>-->
+          {{ 'ACCEPTED' | translate }}
+        </button>
+      </div>
+    </div>
 
-  <div class="row no-padding-bottom">
+    <div class="col request-status-button-container"
+         ng-if="tripMatch.requestInfo.requestorid === user.uberid && !tripMatch.requestInfo.accepted">
+      <div class="margin-auto">
+        <button class="text-center button button-small button-energized meetup-request button-clear icon-left ion-android-checkmark">
+          <!--<i class="icon placeholder-icon"></i>-->
+          {{ 'REQUESTED' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!--ng-class="{'extra-padding': (markers[2].setByUser || tripMatch.userTrip.isMatchTrip || tripMatch.requestInfo.isMatchTrip || tripMatch.requestInfo.requestorid)}"-->
     <div class="col col-offset-20 no-padding-top">
       <p ng-if="markers[2].setByUser || tripMatch.userTrip.isMatchTrip || tripMatch.requestInfo.isMatchTrip || tripMatch.requestInfo.requestorid"
          class="meet-at trip-match-color no-margin-bottom trip-info-text">
@@ -69,12 +93,12 @@
       </label>
     </div>
   </div>
-
+</div>
 
 
   <div class="row" ng-if="!tripMatch.requestInfo.requestorid">
     <div class="margin-auto">
-      <button class="text-center button button-energized meetup-request"
+      <button class="text-center button button-energized meetup-request no-margin-top"
         ng-disabled="!tripMatch.requestInfo.departureTime || !markers[2].setByUser"
         ng-click="requestTrip() ">
         <i class="icon ion-ios7-paperplane placeholder-icon"></i>
@@ -85,17 +109,17 @@
 
   <div class="row" ng-if="tripMatch.requestInfo.requestorid === user.uberid && !tripMatch.requestInfo.accepted">
     <div class="margin-auto">
-      <button class="text-center button button-energized meetup-request disabled">
+      <button class="text-center button button-energized meetup-request disabled no-margin-top">
         <i class="icon ion-android-checkmark placeholder-icon"></i>
         {{ 'TRIP_REQUEST_PENDING' | translate }}
       </button>
     </div>
   </div>
 
-  <div class="row"
+  <div class="row no-margin-top"
        ng-if="tripMatch.requestInfo.requestorid && tripMatch.requestInfo.requestorid !== user.uberid && !tripMatch.requestInfo.accepted">
     <div class="margin-auto">
-      <button class="text-center button button-energized meetup-request" ng-click="acceptRequest()">
+      <button class="text-center button button-energized meetup-request no-margin-top" ng-click="acceptRequest()">
         <i class="icon ion-android-checkmark placeholder-icon"></i>
         {{ 'ACCEPT_REQUEST' | translate }}
       </button>
@@ -103,20 +127,11 @@
   </div>
 
 
-  <div class="row"
-       ng-if="tripMatch.requestInfo.accepted">
-    <div class="margin-auto">
-      <button class="text-center button button-small button-balanced meetup-request button-clear icon-left  ion-android-checkmark"
-              ng-click="acceptRequest()">
-        <!--<i class="icon placeholder-icon"></i>-->
-        {{ 'ACCEPTED' | translate }}
-      </button>
-    </div>
 
-  </div>
-  <div class="row">
+
+  <div class="row" ng-if="tripMatch.requestInfo.accepted">
     <div class="margin-auto text-center uber-request-info">
-      <p>You can request an Uber within 15 minutes of your trip</p>
+      <p>{{ "REQUEST_UBER_INFO" | translate }}</p>
     </div>
   </div>
 

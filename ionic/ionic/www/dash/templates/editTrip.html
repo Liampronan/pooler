@@ -4,13 +4,13 @@
       <div class="text-center">
         <h3 class="text-center new-trip"><b>{{ isNewTrip ? ('NEW_TRIP' | translate) : ("EDIT_TRIP" | translate) }}</b></h3>
         <p class="new-trip"><b>{{'SET_UP_TRIP' | translate}}</b></p>
-        <div class="list card trip-select">
+        <div class="list card trip-select background-transparent">
           <div class="row">
             <div class="col">
-              <label class="item item-input item-stacked-label trip">
+              <label class="item item-input item-stacked-label trip background-white">
 
               <ion-google-place placeholder="{{ (trip.departureLocation.formattedAddress | formatStreetAddress) || ('DEPARTURE_LOCATION' | translate) }}"
-                                ng-model="trip.departureLocation" value="departureLocation"/>
+                                ng-model="trip.departureLocation" value="departureLocation" />
               </label>
             </div>
           </div>

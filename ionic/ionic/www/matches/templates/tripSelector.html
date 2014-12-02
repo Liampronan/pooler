@@ -1,9 +1,16 @@
 <label class="item item-input no-border background-transparent">
   <span class="trip-select-label"><b>{{ 'TRIP' | translate }}:</b></span>
 
-  <button class="button button-small button-outline button-royal margin-auto " ng-click="showSelectTripModal()">
+  <button class="button button-small button-outline button-royal margin-auto " ng-click="showSelectTripModal()"
+          ng-if="trips.length > 0">
     {{ trip.departureLocation.formattedAddress | formatStreetAddress | displayStreet }}
     {{ 'AT' | translate }} {{ trip.departureTime | formatTime }}
+      <span ng-show="trips.length > 1">&nbsp;▼</span>
+  </button>
+
+  <button class="button button-small button-outline button-royal margin-auto " ng-click="showSelectTripModal()"
+          ng-if="trips.length === 0">
+   {{ "NO_TRIPS_YET" | translate }}
       <span ng-show="trips.length > 1">&nbsp;▼</span>
   </button>
 

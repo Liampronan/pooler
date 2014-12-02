@@ -1,6 +1,6 @@
 <ion-view title="Pooler">
   <ion-content class="padding">
-    <div class="trip-modal">
+    <div class="trip-modal"  ng-if="user.firstName">
       <div class="row">
         <div class="small-margin-top">
           <div class="profile round">
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <no-trips ng-if="!trips || trips.length === 0"></no-trips>
+    <no-trips ng-if="(!trips || trips.length === 0) && loaded" ng-cloak></no-trips>
 
     <my-trip ng-if="trips && trips.length > 0"></my-trip>
 
@@ -39,13 +39,13 @@
 
     <div class="text-center" ng-if="trips && trips.length > 0">
       <a ui-sref="tab.dash-edit-trip">
-        <button class="button button-calm button-small larger-text-with-padding icon-left ion-plus-round ">
+        <button class="button button-royal button-small larger-text-with-padding icon-left ion-plus-round add-trip">
           {{ 'ADD_A_TRIP' | translate }}
         </button>
       </a>
     </div>
 
-    <div class="text-center" style="width: 50%; margin: auto; margin-top: 5px">
+    <div class="text-center language-select" style="width: 50%; margin: auto; margin-top: 7.5px;" ng-if="loaded">
       <div class="button-bar">
         <a class="button button-small" ng-class="{'active': selectedLangKey === 'en'}" ng-click="setLanguage('en')">
           English

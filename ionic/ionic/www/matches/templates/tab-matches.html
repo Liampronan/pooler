@@ -1,6 +1,6 @@
 <ion-view title="{{ 'MATCHES' | translate }}">
   <ion-content class="padding" ng-show="loaded">
-    <trip-selector></trip-selector>
+    <trip-selector ></trip-selector>
     <no-matches ng-if="user.matches.length === 0 || !tripMatch"></no-matches>
     <trip-match ng-if="tripMatch"></trip-match>
   </ion-content>

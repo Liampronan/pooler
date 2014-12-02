@@ -1,4 +1,4 @@
-<div class="list card no-padding small-margin-bottom smaller-margin-top my-trip " ng-if="trip">
+<div class="list card no-padding smaller-margin-top my-trip no-margin-bottom" ng-if="trip">
   <div class="item item-divider bar bar-royal background-color-lighter-slate">
     <!--TODO: translate-->
     <span ng-if="!trip.recurring">{{ trip.date | formatDateOnetimeTrip }} {{'AT' | translate}} {{ trip.departureTime | formatTime }}</span>
@@ -26,8 +26,8 @@
 
     <a class="tab-item {{selectedLangKey}}" ui-sref="tab.matches({tripIndex: tripIndex})">
       <i class="icon ion-android-social"></i>
-      <span class="badge badge-royal matches">0</span>
-      <span class="matches-text ">{{'MATCHES' | translate}}</span>
+      <span class="badge badge-royal matches">{{ tripMatch ? 1 : 0}}</span>
+      <span class="matches-text">{{ tripMatch ? ('MATCH' | translate) : ('MATCHES' | translate) }}</span>
     </a>
 
     <a class="tab-item col-25" ng-click="showDeleteConfirm(trip)">

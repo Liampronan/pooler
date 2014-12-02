@@ -29,11 +29,9 @@ angular.module('pooler', ['ionic', 'pooler.controllers', 'pooler.services', 'goo
       console.log('helloo you will get this..');
       $cordovaPush.register(pushConfigService.iosConfig).then(function(result) {
         console.log('¡iOS', result);
-        alert('resuult' + result);
         userService.setAPNRegid(result);
       }, function(err) {
         console.log(':<', err);
-        alert('err' + err);
         // An error occured. Show a message to the user
       });
     } else if (platform === 'Android'){

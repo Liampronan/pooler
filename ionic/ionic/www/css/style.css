@@ -125,7 +125,7 @@ div.trip-info{
 }
 
 div.destination-info{
-    /*width: 251px;*/
+    width: 251px;
 
 }
 
@@ -265,10 +265,14 @@ input.my-trip{
 }
 
 .en .matches-text{
-    margin-left: 10%;
+    margin-left: 15%;
+    right: 8px;
+    position: relative;
+    vertical-align: middle;
 }
 .zh .matches-text{
     margin-left: 2%;
+    vertical-align: middle;
 }
 
 .zh i:before {
@@ -284,7 +288,7 @@ input.my-trip{
 }
 
 .trip-select ul.matches-trip-match li:not(:last-child){
-    margin-bottom: -18%;
+    margin-bottom: -10%;
 }
 
 .trip-select ul:not(.matches-trip-match) li:not(:last-child){
@@ -307,7 +311,7 @@ input.my-trip{
     width: 65px;
     display: inline-block;
     vertical-align: top;
-    margin-top: 15%;
+    margin-top: 10%;
 }
 
 .background-transparent{
@@ -355,7 +359,8 @@ button.meetup-request i {
     font-size: 14px;
     font-weight: bold;
     padding-right: 4px;
-    padding-top: 0px
+    padding-top: 0px;
+    margin-left: -3px
 }
 
 button.set-meetup-point{
@@ -566,6 +571,10 @@ textarea.message-reply{
     background: rgba(32, 50, 69, .15)
 }
 
+.background-white{
+    background-color: white !important;
+}
+
 .sm-border-radius{
     border-radius: 3px;
 }
@@ -577,7 +586,7 @@ ion-content.has-header{
 .meetup-time-request{
     position: relative;
     /*margin-top: 0px !important;*/
-    top: -2px;
+    top: -4px;
 }
 /*back-button-fix for android*/
 .button-icon.ion-ios7-arrow-back{
@@ -605,4 +614,46 @@ i .uber-logo{
 
 .uber-request-info{
     font-size: 12.5px;
+}
+
+div.language-select > .button-bar a {
+    font-size: 12px !important;
+}
+
+.badge-positive.matches{
+    /*background-color: #296ad4 !important;*/
+    /*opacity: .5;*/
+}
+
+.card.trip-match{
+    /*background: rgba(32, 50, 69, .105);*/
+}
+
+.card.trip-match:nth-child(1){
+    margin-top: 10px;
+}
+.card.trip-match:nth-child(2){
+    margin-bottom: 10px;
+}
+
+div.meet-at-display{
+    padding: 10px 0px 0px 0px !important;
+}
+
+.request-status-button-container{
+    position: absolute;
+    margin-top: -35px;
+    margin-left: -10px;
+}
+
+.add-trip{
+    margin-top: 10px;
+}
+
+.gm-style-cc{
+    display: none
+}
+
+a.has-badge span.badge{
+    right: 25px;
 }

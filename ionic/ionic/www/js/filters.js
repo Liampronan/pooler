@@ -65,7 +65,7 @@ app.filter('formatStreetAddress', function () {
   return function(address){
     if (address === undefined) return;
     return address.replace('Street', 'St.').replace('San Francisco', 'SF').replace(', USA', '')
-      .replace('International', 'Int\'l').replace(' San Francisco,', '');
+      .replace('International', 'Int\'l').replace(' San Francisco,', '').replace('Avenue', 'Ave.');
   }
 });
 
@@ -82,6 +82,7 @@ app.filter('matchForTrip', function ($filter) {
         uberid = user.uberid,
         searchCriteria = {},
         matchInfo;
+    if (!trip) return;
     searchCriteria[uberid] = trip["_id"];
 
     angular.forEach(matches, function(match){

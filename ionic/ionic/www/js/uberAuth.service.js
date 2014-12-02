@@ -1,8 +1,8 @@
 //https://login.uber.com/oauth/authorize
 
 angular.module('pooler')
-  .service('uberAuthService', ['$http', '$stateParams', '$q', '$location', 'API_HOST', '$window', 'userService',
-    function ($http, $stateParams, $q, $location, API_HOST, $window, userService) {
+  .service('uberAuthService', ['$http', '$stateParams', '$q', '$location', 'API_HOST', '$window', 'userService', '$state',
+    function ($http, $stateParams, $q, $location, API_HOST, $window, userService, $state) {
       var clientId = "v8eZpgMwr5r8Hvw2FUub8oRESYrbNICH",
           _this = this,
         authUrl = "https://liampronan.com" + '/auth/uber/',
@@ -21,6 +21,7 @@ angular.module('pooler')
               console.log(userProfile);
               userService.setUser(userProfile).then(function(){
                 userService.updatePushInfo();
+                $state.go('tab.dash-home-logged-in');
               });
               console.log('gotten user: ', userService.getUser());
 

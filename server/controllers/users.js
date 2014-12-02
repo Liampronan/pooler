@@ -167,7 +167,7 @@ exports.deleteTrip = function (req, res) {
 
   User.findOne({uberid: uberid}, function(err, user){
     if (err) return console.error(err)
-    var tripid = mongoose.Types.ObjectId(user.trips[tripIndex]['_id']);
+    var tripid = mongoose.Types.ObjectId((user.trips[tripIndex])['_id']);
     console.log('id', tripid);
     user.trips.splice(tripIndex, 1);
 

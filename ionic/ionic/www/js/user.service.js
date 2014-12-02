@@ -1,7 +1,8 @@
 angular.module('pooler')
   .service('userService', ['$http', '$stateParams', '$q', '$location', '$rootScope', 'API_HOST', 'localStorageService',
     '$ionicPopup', '$state',
-    function ($http, $stateParams, $q, $location, $rootScope, API_HOST, localStorageService, $ionicPopup, $state) {
+    function ($http, $stateParams, $q, $location, $rootScope, API_HOST, localStorageService, $ionicPopup,
+              $state) {
       var data = {
           user: {
           }
@@ -17,6 +18,7 @@ angular.module('pooler')
 //        _this.getMatchUsers();
 //        retrieveTripRiders();
 //      })
+
 
       this.getMessages = function () {
         return data['messages'];
@@ -39,26 +41,30 @@ angular.module('pooler')
       }
 
       this.updatePushInfo = function(){
-          var deferred = $q.defer(),
-              regid = data['APNRegid'] || data['ACMRegid'],
-              device = data['ACMRegid'] ? 'Android' : 'iOS',
-              uberid = data['user']['uberid'],
-              pushInfo = {
-                regid: regid,
-                device: device
-              };
-
-        $http({
-          url: API_HOST + '/users/updatePushInfo',
-          method: "POST",
-          data: {
-            'uberid': uberid,
-            'pushInfo': pushInfo
-          }
-        })
+        var deferred = $q.defer(),
+            regid = data['APNRegid'] || data['ACMRegid'],
+            device = data['ACMRegid'] ? 'Android' : 'iOS',
+            uberid = data['user']['uberid'],
+            pushInfo = {
+              regid: regid,
+              device: device
+            };
+        if (pushInfo.regid){ //only update if we have redig (for emulator and users who don't allow push notifcations)
+          $http({
+            url: API_HOST + '/users/updatePushInfo',
+            method: "POST",
+            data: {
+              'uberid': uberid,
+              'pushInfo': pushInfo
+            }
+          })
           .then(function (success) {
             deferred.resolve(success.data)
           })
+        } else {
+          deferred.resolve();
+        }
+
 
         return deferred.promise
       }
@@ -77,8 +83,12 @@ angular.module('pooler')
         } else { //retrieve user from server
           data.user = storedUser;
           retriveUser(bustCache).then(function(user){
-           if (user) deferred.resolve(user);
+           if (user) {
+             deferred.resolve(user);
+
+           }
            if (!user) deferred.resolve();
+           console.log('yo', user);
           })
         }
 //        retriveTrips();
