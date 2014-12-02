@@ -145,10 +145,10 @@ angular.module('pooler')
       'DASHBOARD': '仪表盘',
       'NEARBY_RIDES': '附近的柔晶元素',
       'BACK': '背部',
-      'REQUEST_UBER': 'Request Uber',
+      'REQUEST_UBER': '要求 Uber',
       'MATCH': '比赛',
-      'REQUESTED': 'Requested',
-      'MEETUP_INFO': 'Meetup Info',
+      'REQUESTED': '要求',
+      'MEETUP_INFO': '聚会信息',
       'REQUEST_UBER_INFO': "You can request an Uber within 15 minutes of your trip",
       "NO_TRIPS_YET": "No Trips Added Yet"
     });

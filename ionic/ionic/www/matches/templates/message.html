@@ -17,6 +17,7 @@
     <button ng-click="showMatchNewMessageModal()" class="button button-royal button-full margin-auto sm-border-radius">
       <i class="icon ion-ios7-chatbubble-outline"></i>
       {{ 'MESSAGE' | translate }}
+      <span class="badge badge-light" style="top: 1px !important">{{ messages.length }}</span>
     </button>
     <a href="{{ requestUberURL }}" class="button button-royal button-full margin-auto sm-border-radius"
        ng-disabled="!nearTripDepartureTime()">

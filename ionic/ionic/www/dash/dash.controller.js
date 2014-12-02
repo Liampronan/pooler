@@ -7,7 +7,8 @@ var ctrlModule = angular.module('pooler.controllers');
         if (userService.getUser()) $state.go('tab.dash-home-logged-in');
         $scope.loaded = false;
         userService.setUser().then(function(user){
-          $rootScope.matchCount = user.matches.length;
+          $rootScope.matchCount = user.matches.length > 0 ? 1 : 0;
+          console.log('natches', user.matches);
           $scope.user = user;
           if ($scope.user.uberid){
             $state.go('tab.dash-home-logged-in');

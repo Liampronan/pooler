@@ -39,7 +39,8 @@
 
     <div class="text-center" ng-if="trips && trips.length > 0">
       <a ui-sref="tab.dash-edit-trip">
-        <button class="button button-royal button-small larger-text-with-padding icon-left ion-plus-round add-trip">
+        <button class="button button-royal button-small larger-text-with-padding icon-left ion-plus-round"
+                ng-class="{'add-trip':  (trips.length === 1)}">
           {{ 'ADD_A_TRIP' | translate }}
         </button>
       </a>

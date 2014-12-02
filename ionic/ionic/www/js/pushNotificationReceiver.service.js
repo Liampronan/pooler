@@ -54,6 +54,10 @@ angular.module('pooler')
           newMessagePopup();
         } else if (!event.foreground && androidOriOSNewMessage(event)){
           $state.go('tab.matches');
+        } else if (event.foreground && androidOriOSUpcomingTrip(event)(event)){
+          upcomingTripPopup();
+        } else if (!event.foreground && androidOriOSUpcomingTrip(event)(event)){
+          $state.go('tab.matches');
         }
       }
 
@@ -158,6 +162,7 @@ angular.module('pooler')
           ]
         });
       }
+
       function androidOriOSNewMessage(event){
         return androidNewMessage(event) || iOSNewMessage(event)
       }
@@ -182,6 +187,40 @@ angular.module('pooler')
             },
             {
               text: 'View Message',
+              type: 'button-energized',
+              onTap: function(e) {
+                // e.preventDefault() will stop the popup from closing when tapped.
+                $state.go('tab.matches');
+              }
+            }
+          ]
+        });
+      }
+
+      function androidOriOSUpcomingTrip(event){
+        return androidNewMessage(event) || iOSNewMessage(event)
+      }
+
+      function androidUpcomingTrip(event){
+        return event.payload && event.payload.message.toLowerCase().indexOf('message from a matched rider') > -1
+      }
+
+      function iOSUpcomingTrip(event){
+        return event.alert && event.alert.toLowerCase().indexOf('message from a matched rider') > -1
+      }
+
+      //alert user of new request
+      function upcomingTripPopup(){
+        $ionicPopup.confirm({
+          title: '<b>Upcoming Pooler Trip</b>',
+          template: '<p class="text-center">You have a scheduled trip in fifteen minutes</p>',
+          buttons: [
+            {
+              text: 'Close',
+              type: 'button-default'
+            },
+            {
+              text: 'View Trip',
               type: 'button-energized',
               onTap: function(e) {
                 // e.preventDefault() will stop the popup from closing when tapped.

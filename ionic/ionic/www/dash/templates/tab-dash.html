@@ -19,6 +19,16 @@
 
     </div>
 
+    <div class="text-center language-select" style="width: 50%; margin: auto; margin-top: 7.5px;">
+      <div class="button-bar">
+        <a class="button button-small" ng-class="{'active': selectedLangKey === 'en'}" ng-click="setLanguage('en')">
+          English
+        </a>
+        <a class="button button-small" ng-click="setLanguage('zh')" ng-class="{'active': selectedLangKey === 'zh'}">
+          汉语
+        </a>
+      </div>
+    </div>
 
 
   </ion-content>
